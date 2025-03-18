@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.CardLayout;
+
 
 
 /**
@@ -18,8 +20,18 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents(); 
         this.setSize(1200, 700); // Đặt kích thước cố định
-this.setLocationRelativeTo(null); // Hiển thị ở giữa màn hình
-this.setResizable(false); // Ngăn người dùng thay đổi kích thước cửa sổ
+        this.setLocationRelativeTo(null); // Hiển thị ở giữa màn hình
+        this.setResizable(false); // Ngăn người dùng thay đổi kích thước cửa sổ
+        panelContent.setLayout(new CardLayout()); 
+        panelContent.add(pTrangChu, "TrangChu");
+        panelContent.add(pSanPham, "SanPham");
+        panelContent.add(pPhieuNhap, "PhieuNhap");
+        panelContent.add(pPhieuXuat, "PhieuXuat");
+        panelContent.add(pHoaDon, "HoaDon");
+        panelContent.add(pKhachHang, "KhachHang");
+        panelContent.add(pNhaCungCap, "NhaCungCap");
+        panelContent.add(pNhanVien, "NhanVien");
+        panelContent.add(pThongKe, "ThongKe");
     }
 
     /**
@@ -45,6 +57,24 @@ this.setResizable(false); // Ngăn người dùng thay đổi kích thước c�
         btnThongKe = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         panelContent = new javax.swing.JPanel();
+        pTrangChu = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        pSanPham = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        pPhieuNhap = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pPhieuXuat = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        pHoaDon = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        pKhachHang = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        pNhaCungCap = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        pNhanVien = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        pThongKe = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ thống quản lí");
@@ -261,17 +291,246 @@ this.setResizable(false); // Ngăn người dùng thay đổi kích thước c�
         );
 
         panelContent.setBackground(new java.awt.Color(255, 153, 204));
+        panelContent.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout panelContentLayout = new javax.swing.GroupLayout(panelContent);
-        panelContent.setLayout(panelContentLayout);
-        panelContentLayout.setHorizontalGroup(
-            panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1003, Short.MAX_VALUE)
+        pTrangChu.setBackground(new java.awt.Color(255, 255, 255));
+        pTrangChu.setName("TrangChu"); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        panelContentLayout.setVerticalGroup(
-            panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        javax.swing.GroupLayout pTrangChuLayout = new javax.swing.GroupLayout(pTrangChu);
+        pTrangChu.setLayout(pTrangChuLayout);
+        pTrangChuLayout.setHorizontalGroup(
+            pTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pTrangChuLayout.createSequentialGroup()
+                .addGap(327, 327, 327)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(349, Short.MAX_VALUE))
+        );
+        pTrangChuLayout.setVerticalGroup(
+            pTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pTrangChuLayout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(761, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pTrangChu, "card2");
+
+        pSanPham.setBackground(new java.awt.Color(255, 255, 255));
+        pSanPham.setName("SanPham"); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(255, 0, 153));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pSanPhamLayout = new javax.swing.GroupLayout(pSanPham);
+        pSanPham.setLayout(pSanPhamLayout);
+        pSanPhamLayout.setHorizontalGroup(
+            pSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pSanPhamLayout.createSequentialGroup()
+                .addContainerGap(345, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(331, 331, 331))
+        );
+        pSanPhamLayout.setVerticalGroup(
+            pSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pSanPhamLayout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(804, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pSanPham, "card3");
+
+        pPhieuNhap.setBackground(new java.awt.Color(255, 255, 255));
+        pPhieuNhap.setName("PhieuNhap"); // NOI18N
+
+        jLabel1.setText("PHIEU NHAP");
+
+        javax.swing.GroupLayout pPhieuNhapLayout = new javax.swing.GroupLayout(pPhieuNhap);
+        pPhieuNhap.setLayout(pPhieuNhapLayout);
+        pPhieuNhapLayout.setHorizontalGroup(
+            pPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPhieuNhapLayout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(385, Short.MAX_VALUE))
+        );
+        pPhieuNhapLayout.setVerticalGroup(
+            pPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPhieuNhapLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(jLabel1)
+                .addContainerGap(984, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pPhieuNhap, "card4");
+
+        pPhieuXuat.setBackground(new java.awt.Color(255, 255, 255));
+        pPhieuXuat.setName("PhieuXuat"); // NOI18N
+
+        jLabel2.setText("PHIEU XUAT");
+
+        javax.swing.GroupLayout pPhieuXuatLayout = new javax.swing.GroupLayout(pPhieuXuat);
+        pPhieuXuat.setLayout(pPhieuXuatLayout);
+        pPhieuXuatLayout.setHorizontalGroup(
+            pPhieuXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPhieuXuatLayout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(511, Short.MAX_VALUE))
+        );
+        pPhieuXuatLayout.setVerticalGroup(
+            pPhieuXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPhieuXuatLayout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(jLabel2)
+                .addContainerGap(919, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pPhieuXuat, "card5");
+
+        pHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+        pHoaDon.setName("HoaDon"); // NOI18N
+
+        jLabel4.setText("HOADON");
+
+        javax.swing.GroupLayout pHoaDonLayout = new javax.swing.GroupLayout(pHoaDon);
+        pHoaDon.setLayout(pHoaDonLayout);
+        pHoaDonLayout.setHorizontalGroup(
+            pHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHoaDonLayout.createSequentialGroup()
+                .addGap(301, 301, 301)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(385, Short.MAX_VALUE))
+        );
+        pHoaDonLayout.setVerticalGroup(
+            pHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHoaDonLayout.createSequentialGroup()
+                .addGap(179, 179, 179)
+                .addComponent(jLabel4)
+                .addContainerGap(897, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pHoaDon, "card6");
+
+        pKhachHang.setBackground(new java.awt.Color(255, 255, 255));
+        pKhachHang.setName("KhachHang"); // NOI18N
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("KHACH HANG");
+
+        javax.swing.GroupLayout pKhachHangLayout = new javax.swing.GroupLayout(pKhachHang);
+        pKhachHang.setLayout(pKhachHangLayout);
+        pKhachHangLayout.setHorizontalGroup(
+            pKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pKhachHangLayout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(422, Short.MAX_VALUE))
+        );
+        pKhachHangLayout.setVerticalGroup(
+            pKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pKhachHangLayout.createSequentialGroup()
+                .addGap(176, 176, 176)
+                .addComponent(jLabel5)
+                .addContainerGap(900, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pKhachHang, "card7");
+
+        pNhaCungCap.setBackground(new java.awt.Color(255, 255, 255));
+        pNhaCungCap.setName("NhaCungCap"); // NOI18N
+
+        jLabel6.setText("NHACUNGCAP");
+
+        javax.swing.GroupLayout pNhaCungCapLayout = new javax.swing.GroupLayout(pNhaCungCap);
+        pNhaCungCap.setLayout(pNhaCungCapLayout);
+        pNhaCungCapLayout.setHorizontalGroup(
+            pNhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pNhaCungCapLayout.createSequentialGroup()
+                .addGap(278, 278, 278)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(382, Short.MAX_VALUE))
+        );
+        pNhaCungCapLayout.setVerticalGroup(
+            pNhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pNhaCungCapLayout.createSequentialGroup()
+                .addGap(176, 176, 176)
+                .addComponent(jLabel6)
+                .addContainerGap(900, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pNhaCungCap, "card8");
+
+        pNhanVien.setBackground(new java.awt.Color(255, 255, 255));
+        pNhanVien.setName("NhanVien"); // NOI18N
+
+        jLabel7.setText("NHAN VIEN");
+
+        javax.swing.GroupLayout pNhanVienLayout = new javax.swing.GroupLayout(pNhanVien);
+        pNhanVien.setLayout(pNhanVienLayout);
+        pNhanVienLayout.setHorizontalGroup(
+            pNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pNhanVienLayout.createSequentialGroup()
+                .addGap(355, 355, 355)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(344, Short.MAX_VALUE))
+        );
+        pNhanVienLayout.setVerticalGroup(
+            pNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pNhanVienLayout.createSequentialGroup()
+                .addGap(182, 182, 182)
+                .addComponent(jLabel7)
+                .addContainerGap(894, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pNhanVien, "card9");
+
+        pThongKe.setBackground(new java.awt.Color(255, 255, 255));
+        pThongKe.setName("ThongKe"); // NOI18N
+
+        jLabel8.setText("THONG KE");
+
+        javax.swing.GroupLayout pThongKeLayout = new javax.swing.GroupLayout(pThongKe);
+        pThongKe.setLayout(pThongKeLayout);
+        pThongKeLayout.setHorizontalGroup(
+            pThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pThongKeLayout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(285, Short.MAX_VALUE))
+        );
+        pThongKeLayout.setVerticalGroup(
+            pThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pThongKeLayout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel8)
+                .addContainerGap(831, Short.MAX_VALUE))
+        );
+
+        panelContent.add(pThongKe, "card10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,8 +538,8 @@ this.setResizable(false); // Ngăn người dùng thay đổi kích thước c�
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -301,39 +560,48 @@ this.setResizable(false); // Ngăn người dùng thay đổi kích thước c�
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
+         CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "TrangChu");
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
-        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "HoaDon");
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnPhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuNhapActionPerformed
-        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "PhieuNhap");
     }//GEN-LAST:event_btnPhieuNhapActionPerformed
 
     private void btnPhieuXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuXuatActionPerformed
-        // TODO add your handling code here:
+       CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "PhieuXuat");
     }//GEN-LAST:event_btnPhieuXuatActionPerformed
 
     private void btnNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaCungCapActionPerformed
-        // TODO add your handling code here:
+       CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "NhaCungCap");
     }//GEN-LAST:event_btnNhaCungCapActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-        // TODO add your handling code here:
+         CardLayout layout = (CardLayout) panelContent.getLayout();
+         layout.show(panelContent, "SanPham");
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
-        // TODO add your handling code here:
+      CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "KhachHang");
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
-        // TODO add your handling code here:
+       CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "NhanVien");
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        // TODO add your handling code here:
+       CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "ThongKe");
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -392,7 +660,25 @@ this.setResizable(false); // Ngăn người dùng thay đổi kích thước c�
     private javax.swing.JButton btnPhieuXuat;
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel pHoaDon;
+    private javax.swing.JPanel pKhachHang;
+    private javax.swing.JPanel pNhaCungCap;
+    private javax.swing.JPanel pNhanVien;
+    private javax.swing.JPanel pPhieuNhap;
+    private javax.swing.JPanel pPhieuXuat;
+    private javax.swing.JPanel pSanPham;
+    private javax.swing.JPanel pThongKe;
+    private javax.swing.JPanel pTrangChu;
     private javax.swing.JPanel panelContent;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelName;
