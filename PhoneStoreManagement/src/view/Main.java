@@ -1622,7 +1622,7 @@ public class Main extends javax.swing.JFrame {
         pTrangChu.setBackground(new java.awt.Color(255, 255, 255));
         pTrangChu.setName("TrangChu"); // NOI18N
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\MOBILE SHOP.png")); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon("..\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\MOBILE SHOP.png")); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -1633,22 +1633,22 @@ public class Main extends javax.swing.JFrame {
         jTextPane3.setText("Liên hệ và hỗ trợ khách hàng Hiển thị thông tin liên hệ: ");
         jScrollPane3.setViewportView(jTextPane3);
 
-        jLabel12.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-support-100.png")); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon("..\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-support-100.png")); // NOI18N
         jLabel12.setText("jLabel12");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-hotline-36.png")); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon("..\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-hotline-36.png")); // NOI18N
         jLabel13.setText("09878887666");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-email-36.png")); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon("..\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-email-36.png")); // NOI18N
         jLabel14.setText("mobileshop@gmail.com");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-facebook-36.png")); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon("..\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-facebook-36.png")); // NOI18N
         jLabel15.setText("facebook.com/mobileshop");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1688,7 +1688,7 @@ public class Main extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
         jPanel3.setForeground(new java.awt.Color(255, 204, 204));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-like-100.png")); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon("..\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-like-100.png")); // NOI18N
         jLabel10.setText("jLabel10");
 
         jTextPane5.setBackground(new java.awt.Color(255, 204, 204));
