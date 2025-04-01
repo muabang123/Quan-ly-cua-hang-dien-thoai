@@ -554,10 +554,12 @@ public class Main extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        JTableSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JTableSanPham.setGridColor(new java.awt.Color(255, 255, 255));
         JTableSanPham.setRowHeight(30);
         JTableSanPham.setSelectionBackground(new java.awt.Color(255, 255, 255));
         JTableSanPham.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        JTableSanPham.setShowGrid(true);
         JTableSanPham.getTableHeader().setResizingAllowed(false);
         JTableSanPham.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(JTableSanPham);
@@ -1842,7 +1844,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonXuatSanPhamActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        ThemPhieuNhap themPN = new ThemPhieuNhap();
+        themPN.setVisible(true);
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
