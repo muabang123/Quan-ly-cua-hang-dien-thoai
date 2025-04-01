@@ -34,11 +34,11 @@ public class PhieuNhapBUS {
         return phieuNhapDAO.update(phieu) != 0;
     }
 
-    public boolean delete(int maPhieuNhap) {
+    public boolean delete(String maPhieuNhap) {
         return phieuNhapDAO.delete(maPhieuNhap) != 0;
     }
 
-    public PhieuNhapDTO getById(int maPhieuNhap) {
+    public PhieuNhapDTO getById(String maPhieuNhap) {
         return phieuNhapDAO.selectById(maPhieuNhap);
     }
 

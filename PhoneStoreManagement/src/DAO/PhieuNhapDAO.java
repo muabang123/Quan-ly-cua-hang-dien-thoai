@@ -2,23 +2,23 @@ package DAO;
 
 import DTO.PhieuNhapDTO;
 import config.JDBCUtil;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PhieuNhapDAO {
+public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
 
     public static PhieuNhapDAO getInstance() {
         return new PhieuNhapDAO();
     }
 
+    @Override
     public int insert(PhieuNhapDTO t) {
         int result = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO PhieuNhap (MaPhieuNhap, MaNhanVien, MaNhaCungCap, NgayNhap, TongTien) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO phieunhap (MaPhieuNhap, MaNhanVien, MaNhaCungCap, NgayNhap, TongTien) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, t.getMaPhieuNhap());
             pst.setInt(2, t.getMaNhanVien());
@@ -33,11 +33,12 @@ public class PhieuNhapDAO {
         return result;
     }
 
+    @Override
     public int update(PhieuNhapDTO t) {
         int result = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE PhieuNhap SET MaNhanVien=?, MaNhaCungCap=?, NgayNhap=?, TongTien=? WHERE MaPhieuNhap=?";
+            String sql = "UPDATE phieunhap SET MaNhanVien=?, MaNhaCungCap=?, NgayNhap=?, TongTien=? WHERE MaPhieuNhap=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, t.getMaNhanVien());
             pst.setInt(2, t.getMaNhaCungCap());
@@ -52,13 +53,14 @@ public class PhieuNhapDAO {
         return result;
     }
 
-    public int delete(int maPhieuNhap) {
+    @Override
+    public int delete(String t) {
         int result = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "DELETE FROM PhieuNhap WHERE MaPhieuNhap = ?";
+            String sql = "DELETE FROM phieunhap WHERE MaPhieuNhap = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, maPhieuNhap);
+            pst.setString(1, t);
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -67,11 +69,12 @@ public class PhieuNhapDAO {
         return result;
     }
 
+    @Override
     public ArrayList<PhieuNhapDTO> selectAll() {
         ArrayList<PhieuNhapDTO> result = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM PhieuNhap ORDER BY MaPhieuNhap DESC";
+            String sql = "SELECT * FROM PhieuNhap ORDER BY MaPhieuNhap ASC";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -91,13 +94,14 @@ public class PhieuNhapDAO {
         return result;
     }
 
-    public PhieuNhapDTO selectById(int id) {
+    @Override
+    public PhieuNhapDTO selectById(String t) {
         PhieuNhapDTO result = null;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM PhieuNhap WHERE MaPhieuNhap = ?";
+            String sql = "SELECT * FROM PhieuNhap WHERE MaPhieuNhap=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
+            pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 result = new PhieuNhapDTO(
@@ -115,6 +119,7 @@ public class PhieuNhapDAO {
         return result;
     }
 
+    @Override
     public int getAutoIncrement() {
         int result = -1;
         try {
