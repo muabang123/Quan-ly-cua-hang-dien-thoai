@@ -8,6 +8,12 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import BUS.PhieuNhapBUS;
+import DTO.PhieuNhapDTO;
+import BUS.SanPhamBUS;
+import DTO.SanPhamDTO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -17,7 +23,8 @@ import java.awt.Font;
  * @author MSI Gaming
  */
 public class Main extends javax.swing.JFrame {
-
+    private PhieuNhapBUS phieuNhapBUS = new PhieuNhapBUS();
+    private SanPhamBUS sanphamBUS = new SanPhamBUS();
     /**
      * Creates new form Main
      */
@@ -37,10 +44,10 @@ public class Main extends javax.swing.JFrame {
         panelContent.add(pNhanVien, "NhanVien");
         panelContent.add(pThongKe, "ThongKe");
         
-      TableSanPham.getTableHeader().setForeground(Color.BLACK);      // Đổi màu chữ
-      TableSanPham.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14)); // Đổi font chữ
-      TableSanPham.getColumnModel().getColumn(0).setPreferredWidth(40); // Cột đầu tiên rộng 150px
-      TableSanPham.getColumnModel().getColumn(1).setPreferredWidth(100);
+      JTableSanPham.getTableHeader().setForeground(Color.BLACK);      // Đổi màu chữ
+      JTableSanPham.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14)); // Đổi font chữ
+      JTableSanPham.getColumnModel().getColumn(0).setPreferredWidth(40); // Cột đầu tiên rộng 150px
+      JTableSanPham.getColumnModel().getColumn(1).setPreferredWidth(100);
           }
 
     /**
@@ -83,7 +90,7 @@ public class Main extends javax.swing.JFrame {
         Buttonrefesh = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        TableSanPham = new javax.swing.JTable();
+        JTableSanPham = new javax.swing.JTable();
         pPhieuNhap = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jButton37 = new javax.swing.JButton();
@@ -99,6 +106,8 @@ public class Main extends javax.swing.JFrame {
         jLabel64 = new javax.swing.JLabel();
         jButton48 = new javax.swing.JButton();
         jLabel70 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        JTablePhieuNhap = new javax.swing.JTable();
         pPhieuXuat = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jButton49 = new javax.swing.JButton();
@@ -225,9 +234,7 @@ public class Main extends javax.swing.JFrame {
 
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHome.setForeground(new java.awt.Color(0, 0, 0));
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-home-26.png"))); // NOI18N
         btnHome.setText("Trang chủ");
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -239,9 +246,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHoaDon.setForeground(new java.awt.Color(0, 0, 0));
         btnHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-order-26.png"))); // NOI18N
         btnHoaDon.setText("Hóa đơn");
         btnHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -253,9 +258,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnPhieuNhap.setBackground(new java.awt.Color(255, 255, 255));
         btnPhieuNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnPhieuNhap.setForeground(new java.awt.Color(0, 0, 0));
         btnPhieuNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-create-order-26.png"))); // NOI18N
         btnPhieuNhap.setText("Phiếu nhập ");
         btnPhieuNhap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -267,9 +270,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnNhaCungCap.setBackground(new java.awt.Color(255, 255, 255));
         btnNhaCungCap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNhaCungCap.setForeground(new java.awt.Color(0, 0, 0));
         btnNhaCungCap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-supplier-26.png"))); // NOI18N
         btnNhaCungCap.setText("Nhà Cung cấp");
         btnNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -281,11 +282,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnSanPham.setBackground(new java.awt.Color(255, 255, 255));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSanPham.setForeground(new java.awt.Color(0, 0, 0));
         btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-smartphones-26.png"))); // NOI18N
-        btnSanPham.setText("Sản phầm");
+        btnSanPham.setText("Sản phẩm");
         btnSanPham.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSanPham.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSanPham.setIconTextGap(10);
@@ -295,9 +294,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnKhachHang.setForeground(new java.awt.Color(0, 0, 0));
         btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-customer-26.png"))); // NOI18N
         btnKhachHang.setText("Khách hàng ");
         btnKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -309,9 +306,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnNhanVien.setBackground(new java.awt.Color(255, 255, 255));
         btnNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNhanVien.setForeground(new java.awt.Color(0, 0, 0));
         btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-employee-26.png"))); // NOI18N
         btnNhanVien.setText("Nhân viên");
         btnNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -323,9 +318,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnThongKe.setBackground(new java.awt.Color(255, 255, 255));
         btnThongKe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnThongKe.setForeground(new java.awt.Color(0, 0, 0));
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-statistics-26.png"))); // NOI18N
         btnThongKe.setText("Thống kê");
         btnThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -337,9 +330,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setBackground(new java.awt.Color(255, 255, 255));
         btnExit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(0, 0, 0));
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-power-off-26.png"))); // NOI18N
         btnExit.setText("Thoát");
         btnExit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -401,7 +392,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButtonThemSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonThemSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButtonThemSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +399,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonSuaSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonSuaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButtonSuaSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,7 +406,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonXoaSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonXoaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButtonXoaSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,7 +413,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonChiTietSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonChiTietSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
         jButtonChiTietSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,7 +420,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonXuatSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonXuatSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButtonXuatSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -461,7 +447,6 @@ public class Main extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(51, 51, 255));
         jLabel22.setText("THÊM");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,12 +454,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        TextFieldSearch.setBackground(new java.awt.Color(255, 255, 255));
         TextFieldSearch.setText("Nhập nội dung  tìm kiếm ...");
 
-        Buttonrefesh.setBackground(new java.awt.Color(255, 255, 255));
         Buttonrefesh.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Buttonrefesh.setForeground(new java.awt.Color(0, 0, 0));
         Buttonrefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-30.png"))); // NOI18N
         Buttonrefesh.setText("  Làm mới");
         Buttonrefesh.addActionListener(new java.awt.event.ActionListener() {
@@ -519,7 +501,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButtonChiTietSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonXuatSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(TextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -556,23 +538,31 @@ public class Main extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        TableSanPham.setBackground(new java.awt.Color(255, 255, 255));
-        TableSanPham.setForeground(new java.awt.Color(0, 0, 0));
-        TableSanPham.setModel(new javax.swing.table.DefaultTableModel(
+        JTableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "2", "3", "4", "5", "6", "7", "8"}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP ", "Tên sản phẩm", "Hãng", "Hệ điều hành", "Số lượng", "Suất xứ", "Đơn giá", "Đơn vị tính"
+                "Mã SP ", "Tên sản phẩm", "Số Lượng", "Đơn Giá", "Đơn Vị Tính", "Mã Loại"
             }
-        ));
-        TableSanPham.setGridColor(new java.awt.Color(255, 255, 255));
-        TableSanPham.setRowHeight(30);
-        TableSanPham.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        TableSanPham.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        TableSanPham.getTableHeader().setResizingAllowed(false);
-        TableSanPham.getTableHeader().setReorderingAllowed(false);
-        jScrollPane6.setViewportView(TableSanPham);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        JTableSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JTableSanPham.setGridColor(new java.awt.Color(255, 255, 255));
+        JTableSanPham.setRowHeight(30);
+        JTableSanPham.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        JTableSanPham.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        JTableSanPham.setShowGrid(true);
+        JTableSanPham.getTableHeader().setResizingAllowed(false);
+        JTableSanPham.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(JTableSanPham);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -619,7 +609,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton37.setBackground(new java.awt.Color(255, 255, 255));
         jButton37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -627,7 +616,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton38.setBackground(new java.awt.Color(255, 255, 255));
         jButton38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton38.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -635,7 +623,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton39.setBackground(new java.awt.Color(255, 255, 255));
         jButton39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton39.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -643,10 +630,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton40.setBackground(new java.awt.Color(255, 255, 255));
         jButton40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
-        jButton42.setBackground(new java.awt.Color(255, 255, 255));
         jButton42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton42.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -674,7 +659,6 @@ public class Main extends javax.swing.JFrame {
         jLabel64.setForeground(new java.awt.Color(51, 51, 255));
         jLabel64.setText("THÊM");
 
-        jButton48.setBackground(new java.awt.Color(255, 255, 255));
         jButton48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton48.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -722,12 +706,12 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(786, Short.MAX_VALUE))
+                .addContainerGap(791, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton42)
                     .addComponent(jButton40)
@@ -748,13 +732,36 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel63))))
         );
 
+        JTablePhieuNhap.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "MaPhieuNhap", "MaNhanVien", "MaNhaCungCap", "NgayNhap", "TongTien"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(JTablePhieuNhap);
+
         javax.swing.GroupLayout pPhieuNhapLayout = new javax.swing.GroupLayout(pPhieuNhap);
         pPhieuNhap.setLayout(pPhieuNhapLayout);
         pPhieuNhapLayout.setHorizontalGroup(
             pPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPhieuNhapLayout.createSequentialGroup()
+            .addGroup(pPhieuNhapLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
                 .addContainerGap())
         );
         pPhieuNhapLayout.setVerticalGroup(
@@ -762,7 +769,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pPhieuNhapLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1000, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelContent.add(pPhieuNhap, "card4");
@@ -772,7 +781,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton49.setBackground(new java.awt.Color(255, 255, 255));
         jButton49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton49.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -780,7 +788,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton50.setBackground(new java.awt.Color(255, 255, 255));
         jButton50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -788,7 +795,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton51.setBackground(new java.awt.Color(255, 255, 255));
         jButton51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton51.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -796,10 +802,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton52.setBackground(new java.awt.Color(255, 255, 255));
         jButton52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
-        jButton54.setBackground(new java.awt.Color(255, 255, 255));
         jButton54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton54.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -827,7 +831,6 @@ public class Main extends javax.swing.JFrame {
         jLabel77.setForeground(new java.awt.Color(51, 51, 255));
         jLabel77.setText("THÊM");
 
-        jButton55.setBackground(new java.awt.Color(255, 255, 255));
         jButton55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton55.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -875,7 +878,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton54, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton55, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(784, Short.MAX_VALUE))
+                .addContainerGap(789, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -925,7 +928,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton56.setBackground(new java.awt.Color(255, 255, 255));
         jButton56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton56.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -933,7 +935,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton57.setBackground(new java.awt.Color(255, 255, 255));
         jButton57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton57.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -941,7 +942,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton58.setBackground(new java.awt.Color(255, 255, 255));
         jButton58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton58.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -949,10 +949,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton59.setBackground(new java.awt.Color(255, 255, 255));
         jButton59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
-        jButton61.setBackground(new java.awt.Color(255, 255, 255));
         jButton61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton61.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -980,7 +978,6 @@ public class Main extends javax.swing.JFrame {
         jLabel85.setForeground(new java.awt.Color(51, 51, 255));
         jLabel85.setText("THÊM");
 
-        jButton62.setBackground(new java.awt.Color(255, 255, 255));
         jButton62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton62.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1028,7 +1025,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton62, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(778, Short.MAX_VALUE))
+                .addContainerGap(783, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1078,7 +1075,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton63.setBackground(new java.awt.Color(255, 255, 255));
         jButton63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton63.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1086,7 +1082,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton64.setBackground(new java.awt.Color(255, 255, 255));
         jButton64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton64.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1094,7 +1089,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton65.setBackground(new java.awt.Color(255, 255, 255));
         jButton65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton65.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1102,10 +1096,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton66.setBackground(new java.awt.Color(255, 255, 255));
         jButton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
-        jButton68.setBackground(new java.awt.Color(255, 255, 255));
         jButton68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton68.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1133,7 +1125,6 @@ public class Main extends javax.swing.JFrame {
         jLabel93.setForeground(new java.awt.Color(51, 51, 255));
         jLabel93.setText("THÊM");
 
-        jButton69.setBackground(new java.awt.Color(255, 255, 255));
         jButton69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton69.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1181,7 +1172,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton68, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton69, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(778, Short.MAX_VALUE))
+                .addContainerGap(783, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1231,7 +1222,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton70.setBackground(new java.awt.Color(255, 255, 255));
         jButton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton70.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1239,7 +1229,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton71.setBackground(new java.awt.Color(255, 255, 255));
         jButton71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton71.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1247,7 +1236,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton72.setBackground(new java.awt.Color(255, 255, 255));
         jButton72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton72.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1255,10 +1243,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton73.setBackground(new java.awt.Color(255, 255, 255));
         jButton73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
-        jButton75.setBackground(new java.awt.Color(255, 255, 255));
         jButton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton75.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1286,7 +1272,6 @@ public class Main extends javax.swing.JFrame {
         jLabel101.setForeground(new java.awt.Color(51, 51, 255));
         jLabel101.setText("THÊM");
 
-        jButton76.setBackground(new java.awt.Color(255, 255, 255));
         jButton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton76.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1334,7 +1319,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton75, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton76, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(778, Short.MAX_VALUE))
+                .addContainerGap(783, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1384,7 +1369,6 @@ public class Main extends javax.swing.JFrame {
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton77.setBackground(new java.awt.Color(255, 255, 255));
         jButton77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton77.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1392,7 +1376,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton78.setBackground(new java.awt.Color(255, 255, 255));
         jButton78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton78.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1400,7 +1383,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton79.setBackground(new java.awt.Color(255, 255, 255));
         jButton79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton79.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1408,10 +1390,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton80.setBackground(new java.awt.Color(255, 255, 255));
         jButton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
-        jButton82.setBackground(new java.awt.Color(255, 255, 255));
         jButton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton82.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1439,7 +1419,6 @@ public class Main extends javax.swing.JFrame {
         jLabel109.setForeground(new java.awt.Color(51, 51, 255));
         jLabel109.setText("THÊM");
 
-        jButton83.setBackground(new java.awt.Color(255, 255, 255));
         jButton83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton83.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1488,7 +1467,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton82, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton83, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(778, Short.MAX_VALUE))
+                .addContainerGap(783, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1545,7 +1524,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pThongKeLayout.createSequentialGroup()
                 .addGap(340, 340, 340)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(643, Short.MAX_VALUE))
+                .addContainerGap(648, Short.MAX_VALUE))
         );
         pThongKeLayout.setVerticalGroup(
             pThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1575,17 +1554,14 @@ public class Main extends javax.swing.JFrame {
         jLabel12.setText("jLabel12");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-hotline-36.png")); // NOI18N
         jLabel13.setText("09878887666");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-email-36.png")); // NOI18N
         jLabel14.setText("mobileshop@gmail.com");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setIcon(new javax.swing.ImageIcon("D:\\Java_DoAn\\Quan-ly-cua-hang-dien-thoai\\PhoneStoreManagement\\src\\icon\\icons8-facebook-36.png")); // NOI18N
         jLabel15.setText("facebook.com/mobileshop");
 
@@ -1723,7 +1699,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(pTrangChuLayout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(jLabel9)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         pTrangChuLayout.setVerticalGroup(
             pTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1776,20 +1752,52 @@ public class Main extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) panelContent.getLayout();
           layout.show(panelContent, "HoaDon");
     }//GEN-LAST:event_btnHoaDonActionPerformed
+    private void loadPhieuNhapToTable() {
+    DefaultTableModel model = (DefaultTableModel) JTablePhieuNhap.getModel();
+    model.setRowCount(0); // clear bảng
 
+    ArrayList<PhieuNhapDTO> list = phieuNhapBUS.getAll();
+    for (PhieuNhapDTO pn : list) {
+        model.addRow(new Object[]{
+            pn.getMaPhieuNhap(),
+            pn.getMaNhanVien(),
+            pn.getMaNhaCungCap(),
+            pn.getNgayNhap(),
+            pn.getTongTien()
+        });
+    }
+}
     private void btnPhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuNhapActionPerformed
         CardLayout layout = (CardLayout) panelContent.getLayout();
           layout.show(panelContent, "PhieuNhap");
+          loadPhieuNhapToTable();
     }//GEN-LAST:event_btnPhieuNhapActionPerformed
 
     private void btnNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaCungCapActionPerformed
        CardLayout layout = (CardLayout) panelContent.getLayout();
           layout.show(panelContent, "NhaCungCap");
     }//GEN-LAST:event_btnNhaCungCapActionPerformed
+    private void loadSanPhamToTable() {
+    DefaultTableModel model = (DefaultTableModel) JTableSanPham.getModel();
+    model.setRowCount(0); // Clear the table
+
+    ArrayList<SanPhamDTO> list = new SanPhamBUS().getAll(); // Get the list of products from SanPhamBUS
+    for (SanPhamDTO sp : list) {
+        model.addRow(new Object[]{
+            sp.getMaSanPham(),
+            sp.getTenSanPham(),
+            sp.getSoLuong(),
+            sp.getDonGia(),
+            sp.getDonViTinh(),
+            sp.getMaLoai()
+        });
+    }
+}
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
          CardLayout layout = (CardLayout) panelContent.getLayout();
          layout.show(panelContent, "SanPham");
+         loadSanPhamToTable();
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
@@ -1836,7 +1844,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonXuatSanPhamActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        ThemPhieuNhap themPN = new ThemPhieuNhap();
+        themPN.setVisible(true);
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
@@ -2006,7 +2016,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buttonrefesh;
-    private javax.swing.JTable TableSanPham;
+    private javax.swing.JTable JTablePhieuNhap;
+    private javax.swing.JTable JTableSanPham;
     private javax.swing.JTextField TextFieldSearch;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHoaDon;
@@ -2130,6 +2141,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextPane jTextPane1;

@@ -2,7 +2,6 @@ package config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class JDBCUtil {
@@ -10,29 +9,28 @@ public class JDBCUtil {
     public static Connection getConnection() {
         Connection result = null;
         try {
-            // Đăng ký MySQL Driver với DriverManager
+            // Dang ky MySQL Driver voi DriverManager
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            
-            // Các thông số kết nối
-            String url = "jdbc:mysql://localhost:3306/quanlybanhang?useSSL=false&serverTimezone=UTC";
+            //Cac thong so
+            String url = "jdbc:mySQL://localhost:3307/quanlybanhang";
             String userName = "root";
             String password = "";
-            
-            // Tạo kết nối
+            //Tao ket noi 
             result = DriverManager.getConnection(url, userName, password);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Lỗi kết nối CSDL: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         return result;
     }
 
     public static void closeConnection(Connection c) {
-        if (c != null) {
-            try {
+        try {
+            if (c != null) {
                 c.close();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Lỗi khi đóng kết nối: " + e.getMessage(), "Lỗi", JOptionPane.WARNING_MESSAGE);
             }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
         }
     }
 }
