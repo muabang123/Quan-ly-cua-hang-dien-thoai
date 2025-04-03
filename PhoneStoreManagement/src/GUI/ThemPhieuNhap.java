@@ -3,11 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Iterator;
 import DTO.SanPhamDTO;
 import BUS.SanPhamBUS;
 import BUS.ChiTietSanPhamBUS;
 import DTO.ChiTietSanPhamDTO;
 import DAO.ChiTietSanPhamDAO;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -105,7 +113,6 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jTextField1.setText("🔍 Nhập tên sản phẩm, mã sản phẩm");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -115,6 +122,12 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(204, 204, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -311,10 +324,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jTable2.setBackground(new java.awt.Color(204, 204, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã SP", "Tên SP", "Ram", "Rom", "Màu sắc", "Số lượng", "Đơn giá"
@@ -464,6 +474,58 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTextField1.setText("🔍 Nhập tên sản phẩm, mã sản phẩm");
+        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField1.getText().equals("🔍 Nhập tên sản phẩm, mã sản phẩm")) {
+                    jTextField1.setText("");
+                    jTextField1.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField1.getText().isEmpty()) {
+                    jTextField1.setText("🔍 Nhập tên sản phẩm, mã sản phẩm"); // Khôi phục lại placeholder khi user không nhập
+                    jTextField1.setForeground(new java.awt.Color(153, 153, 153)); // Đổi màu placeholder thành xám
+                }
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String maSanPham = jTextField2.getText();
+                String tenSanPham = jTextField3.getText();
+                String ram = (String) jComboBox1.getSelectedItem();
+                String rom = (String) jComboBox2.getSelectedItem();
+                String mauSac = (String) jComboBox3.getSelectedItem();
+                int soLuong = Integer.parseInt(jTextField5.getText());
+                double donGia = Double.parseDouble(jTextField4.getText());
+
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.addRow(new Object[]{
+                    model.getRowCount() + 1,
+                    maSanPham,
+                    tenSanPham,
+                    ram,
+                    rom,
+                    mauSac,
+                    soLuong,
+                    donGia
+                });
+
+                // Có thể gọi phương thức lưu vào cơ sở dữ liệu (nếu cần) ở đây
+                // Ví dụ: lưu thông tin vào database hoặc gọi thêm logic xử lý nếu cần.
+            }
+        });
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -473,7 +535,51 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Chọn file Excel");
+    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files", "xlsx"));
+
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try (FileInputStream fis = new FileInputStream(selectedFile);
+             Workbook workbook = new XSSFWorkbook(fis)) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = sheet.iterator();
+            if (rowIterator.hasNext()) rowIterator.next();
+
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            if (model.getColumnCount() == 0) {
+                model.setColumnIdentifiers(new Object[]{
+                    "STT", "Mã SP", "Tên SP", "RAM", "ROM", "Màu", "Số lượng", "Đơn giá"
+                });
+            }
+
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                String maSP = row.getCell(0).getStringCellValue();
+                String tenSP = row.getCell(1).getStringCellValue();
+                String ram = row.getCell(2).getStringCellValue();
+                String rom = row.getCell(3).getStringCellValue();
+                String mau = row.getCell(4).getStringCellValue();
+                int soLuong = (int) row.getCell(5).getNumericCellValue();
+                double donGia = row.getCell(6).getNumericCellValue();
+
+                model.addRow(new Object[]{
+                    model.getRowCount() + 1,
+                    maSP, tenSP, ram, rom, mau, soLuong, donGia
+                });
+            }
+
+            JOptionPane.showMessageDialog(this, "Đã nhập dữ liệu thành công!");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi đọc file Excel: " + e.getMessage());
+        }
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
+    
     private void loadProductTable() {
     SanPhamBUS sanPhamBUS = new SanPhamBUS();
     ArrayList<SanPhamDTO> listSP = sanPhamBUS.getAll();

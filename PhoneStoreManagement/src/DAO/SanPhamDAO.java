@@ -79,14 +79,14 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
         ArrayList<SanPhamDTO> result = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM sanpham ORDER BY MaSanPham ASC";  // Sắp xếp theo MaSanPham ASC
+            String sql = "SELECT * FROM sanpham ORDER BY MaSanPham ASC";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 int maSanPham = rs.getInt("MaSanPham");
                 String tenSanPham = rs.getString("TenSanPham");
                 int soLuong = rs.getInt("SoLuong");
-                BigDecimal donGia = rs.getBigDecimal("DonGia");  // Sử dụng BigDecimal cho DonGia
+                BigDecimal donGia = rs.getBigDecimal("DonGia");
                 String donViTinh = rs.getString("DonViTinh");
                 String hinhAnh = rs.getString("HinhAnh");
                 int maLoai = rs.getInt("MaLoai");
