@@ -128,6 +128,32 @@ public class ChiTietSanPhamDAO implements DAOinterface<ChiTietSanPhamDTO> {
         }
         return result;
     }
+    
+    public static ChiTietSanPhamDTO selectByMaSP(String t) {
+        ChiTietSanPhamDTO result = null;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM chitietsanpham WHERE MaSanPham=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int maSanPham = rs.getInt("MaSanPham");
+                int maHang = rs.getInt("MaHang");
+                String chip = rs.getString("Chip");
+                String ram = rs.getString("Ram");
+                String rom = rs.getString("Rom");
+                String inch = rs.getString("Inch");
+                String dungLuongPin = rs.getString("DungLuongPin");
+                String mauSac = rs.getString("MauSac");
+                result = new ChiTietSanPhamDTO(maSanPham, maHang, chip, ram, rom, inch, dungLuongPin, mauSac);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 
     @Override
     public int getAutoIncrement() {
@@ -241,5 +267,33 @@ public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuXuat(int maphieuxuat) {
     
     return result;
 }
+    public ChiTietSanPhamDTO selectByRamRomMauSac(int maSanPham, String ram, String rom, String mauSac) {
+    ChiTietSanPhamDTO result = null;
+    try {
+        Connection con = JDBCUtil.getConnection();
+        // Tìm kiếm dựa trên Ram, Rom và MauSac
+        String sql = "SELECT * FROM chitietsanpham WHERE Ram = ? AND Rom = ? AND MauSac = ?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, ram);   // Tìm theo ram
+        pst.setString(2, rom);   // Tìm theo rom
+        pst.setString(3, mauSac); // Tìm theo mauSac
+
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            int maSanPhamInt = rs.getInt("MaSanPham");  // Lấy MaSanPham của bản ghi thỏa mãn điều kiện
+            String ramStr = rs.getString("Ram");
+            String romStr = rs.getString("Rom");
+            String mauSacStr = rs.getString("MauSac");
+            result = new ChiTietSanPhamDTO(maSanPhamInt, 0, "", ramStr, romStr, "", "", mauSacStr);
+        }
+        JDBCUtil.closeConnection(con);
+    } catch (SQLException ex) {
+        Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return result;
+}
+
+
+
 
 }

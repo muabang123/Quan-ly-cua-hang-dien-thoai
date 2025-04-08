@@ -41,6 +41,11 @@ public class SanPhamBUS {
         }
         return null;  // Trả về null nếu không tìm thấy sản phẩm
     }
+    public String getTenSanPhamByMaSP(int maSanPham) {
+        SanPhamDTO sp = getByMaSP(maSanPham);
+        return (sp != null) ? sp.getTenSanPham() : "Không rõ";
+    }
+
 
     // Lấy vị trí của sản phẩm trong list theo mã sản phẩm
     public int getIndexByMaSP(int maSanPham) {

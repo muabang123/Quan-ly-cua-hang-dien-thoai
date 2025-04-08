@@ -7,21 +7,35 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.*;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import DTO.SanPhamDTO;
 import BUS.SanPhamBUS;
+import DAO.PhieuNhapDAO;
+import DTO.PhieuNhapDTO;
+import DAO.ChiTietPhieuNhapDAO;
+import DTO.ChiTietPhieuNhapDTO;
+import DAO.SanPhamDAO;
+import DAO.ChiTietSanPhamDAO;
+import DTO.ChiTietPhieuNhapDTO;
 import BUS.ChiTietSanPhamBUS;
 import DTO.ChiTietSanPhamDTO;
 import DAO.ChiTietSanPhamDAO;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Admin
+ * @author minhminh
  */
 public class ThemPhieuNhap extends javax.swing.JFrame {
 
@@ -30,7 +44,10 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
      */
     public ThemPhieuNhap() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         loadProductTable();
+        autoGenerateMaPhieuNhap();
     }
 
     /**
@@ -58,12 +75,12 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jComboBox5 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -152,6 +169,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 jTable1MouseClicked(evt); // Gọi phương thức xử lý sự kiện khi click vào bảng
             }
         });
+        jTable1.setDefaultEditor(Object.class, null);
 
         jButton1.setBackground(new java.awt.Color(0, 204, 255));
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -190,14 +208,11 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("Nhân viên nhập");
 
-        jTextField7.setEditable(false);
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("Nhà cung cấp");
 
         jComboBox4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
@@ -210,6 +225,8 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton3.setText("Nhập hàng");
 
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin1", "admin2" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -221,15 +238,14 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(102, 102, 102)))))
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(102, 102, 102))
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,12 +267,12 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -264,6 +280,78 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
+
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một sản phẩm trước khi nhập hàng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                try {
+                    String maPhieuNhapString = jTextField6.getText().trim();
+                    Map<String, String> mapNhanVien = new HashMap<>();
+                    mapNhanVien.put("admin1", "1");
+                    mapNhanVien.put("admin2", "2");
+                    String tenNhanVien = (String) jComboBox5.getSelectedItem();
+                    String maNhanVien = mapNhanVien.get(tenNhanVien);
+                    String maNhaCungCap = (String) jComboBox4.getSelectedItem();
+                    Timestamp ngayNhap = Timestamp.from(java.time.Instant.now());
+                    double tongTien = Double.parseDouble(jTextField8.getText().trim());
+                    PhieuNhapDTO phieuNhap = new PhieuNhapDTO(maPhieuNhapString, maNhanVien, maNhaCungCap, ngayNhap, tongTien); // MaPhieuNhap là String
+                    PhieuNhapDAO phieuNhapDAO = PhieuNhapDAO.getInstance();
+                    int result = phieuNhapDAO.insert(phieuNhap);
+
+                    if (result > 0) {
+                        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                        for (int i = 0; i < model.getRowCount(); i++) {
+                            String maSanPham = model.getValueAt(i, 1).toString();
+                            int soLuong = (int) model.getValueAt(i, 6);
+                            double donGia = (double) model.getValueAt(i, 7);
+                            String ram = model.getValueAt(i, 3).toString();
+                            String rom = model.getValueAt(i, 4).toString();
+                            String mauSac = model.getValueAt(i, 5).toString();
+                            ChiTietPhieuNhapDTO chiTiet = new ChiTietPhieuNhapDTO(maPhieuNhapString, Integer.parseInt(maSanPham), soLuong, ram, rom, mauSac, donGia);
+                            ChiTietPhieuNhapDAO chiTietPhieuNhapDAO = ChiTietPhieuNhapDAO.getInstance();
+                            ArrayList<ChiTietPhieuNhapDTO> listChiTiet = new ArrayList<>();
+                            listChiTiet.add(chiTiet);
+
+                            SanPhamDAO sanPhamDAO = SanPhamDAO.getInstance();
+                            SanPhamDTO sanPham = sanPhamDAO.selectById(maSanPham);
+                            if (sanPham != null) {
+                                int newSoLuong = sanPham.getSoLuong() + soLuong;
+                                sanPham.setSoLuong(newSoLuong);
+                                sanPhamDAO.update(sanPham);
+                            }
+                            ChiTietSanPhamDAO chiTietSanPhamDAO = ChiTietSanPhamDAO.getInstance();
+                            ChiTietSanPhamDTO ctsanPham = ChiTietSanPhamDAO.selectByMaSP(maSanPham);
+                            String chip = ctsanPham.getChip();
+                            int maHang = ctsanPham.getMaHang();
+                            String inch = ctsanPham.getInch();
+                            String dungLuongPin = ctsanPham.getDungLuongPin();
+                            ChiTietSanPhamDTO chiTietSanPham = chiTietSanPhamDAO.selectByRamRomMauSac(Integer.parseInt(maSanPham), ram, rom, mauSac);
+                            if (chiTietSanPham == null) {
+                                chiTietSanPham = new ChiTietSanPhamDTO(Integer.parseInt(maSanPham), maHang, chip, ram, rom, inch, dungLuongPin, mauSac);
+                                chiTietSanPhamDAO.insert(chiTietSanPham);
+                            }
+
+                            int chiTietResult = chiTietPhieuNhapDAO.insert(listChiTiet);
+
+                            if (chiTietResult <= 0) {
+                                JOptionPane.showMessageDialog(null, "Có lỗi khi thêm sản phẩm vào chi tiết phiếu nhập!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                        }
+                        JOptionPane.showMessageDialog(null, "Sản phẩm đã được thêm vào phiếu nhập!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Có lỗi khi tạo phiếu nhập!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng nhập đúng định dạng cho tất cả các trường!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Giá nhập");
@@ -339,6 +427,12 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTable2);
+        jTable2.setDefaultEditor(Object.class, null);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 0, 255));
         jButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -353,7 +447,6 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel14.setText("Loại Sản phẩm");
 
-        jTextField9.setEditable(false);
         jTextField9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -474,12 +567,12 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTextField1.setText("🔍 Nhập tên sản phẩm, mã sản phẩm");
+        jTextField1.setText(" Nhập tên sản phẩm, mã sản phẩm");
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (jTextField1.getText().equals("🔍 Nhập tên sản phẩm, mã sản phẩm")) {
+                if (jTextField1.getText().equals(" Nhập tên sản phẩm, mã sản phẩm")) {
                     jTextField1.setText("");
                     jTextField1.setForeground(Color.BLACK);
                 }
@@ -488,7 +581,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (jTextField1.getText().isEmpty()) {
-                    jTextField1.setText("🔍 Nhập tên sản phẩm, mã sản phẩm"); // Khôi phục lại placeholder khi user không nhập
+                    jTextField1.setText(" Nhập tên sản phẩm, mã sản phẩm"); // Khôi phục lại placeholder khi user không nhập
                     jTextField1.setForeground(new java.awt.Color(153, 153, 153)); // Đổi màu placeholder thành xám
                 }
             }
@@ -501,6 +594,21 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một sản phẩm trước khi thêm!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                try {
+                    int soLuong = Integer.parseInt(jTextField5.getText().trim());
+                    if (soLuong <= 0) {
+                        JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Số lượng phải là số nguyên hợp lệ!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 String maSanPham = jTextField2.getText();
                 String tenSanPham = jTextField3.getText();
                 String ram = (String) jComboBox1.getSelectedItem();
@@ -520,22 +628,109 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                     soLuong,
                     donGia
                 });
-
+                calculateTotal();
                 // Có thể gọi phương thức lưu vào cơ sở dữ liệu (nếu cần) ở đây
                 // Ví dụ: lưu thông tin vào database hoặc gọi thêm logic xử lý nếu cần.
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                int selectedRow = jTable2.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một sản phẩm để sửa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                String maSP = jTextField2.getText();
+                String tenSP = jTextField3.getText();
+                String ram = (String) jComboBox1.getSelectedItem();
+                String rom = (String) jComboBox2.getSelectedItem();
+                String mauSac = (String) jComboBox3.getSelectedItem();
+
+                int soLuong;
+                double donGia;
+
+                try {
+                    soLuong = Integer.parseInt(jTextField5.getText());
+                    donGia = Double.parseDouble(jTextField4.getText());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng nhập số lượng và đơn giá hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.setValueAt(maSP, selectedRow, 1);
+                model.setValueAt(tenSP, selectedRow, 2);
+                model.setValueAt(ram, selectedRow, 3);
+                model.setValueAt(rom, selectedRow, 4);
+                model.setValueAt(mauSac, selectedRow, 5);
+                model.setValueAt(soLuong, selectedRow, 6);
+                model.setValueAt(donGia, selectedRow, 7);
+
+                JOptionPane.showMessageDialog(null, "Thông tin sản phẩm đã được sửa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                int selectedRow = jTable2.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một sản phẩm để xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                        model.removeRow(selectedRow);
+                        calculateTotal();
+                    }
+                }
             }
         });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private boolean isErrorShown = false;
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
+       String searchText = jTextField1.getText().trim().toLowerCase();
+       if (searchText.isEmpty() || searchText.equals("nhập tên sản phẩm, mã sản phẩm")) {
+           loadProductTable();
+           return;
+       }
+       SanPhamBUS sanPhamBUS = new SanPhamBUS();
+       ArrayList<SanPhamDTO> searchResults = sanPhamBUS.search(searchText); 
+       if (searchResults.isEmpty() && !isErrorShown) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm nào!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            isErrorShown = true;
+        } else {
+            updateProductTable(searchResults);
+            isErrorShown = false;
+        }
     }//GEN-LAST:event_jTextField1ActionPerformed
+    
+    private void updateProductTable(ArrayList<SanPhamDTO> products) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+    for (SanPhamDTO sp : products) {
+        model.addRow(new Object[]{sp.getMaSanPham(), sp.getTenSanPham(), sp.getSoLuong()});
+    }
+}
+    private void autoGenerateMaPhieuNhap() {
+    PhieuNhapDAO dao = PhieuNhapDAO.getInstance();
+    String lastId = dao.getLastMaPhieuNhap();
+    
+    String newId;
+    if (lastId != null && !lastId.isEmpty()) {
+        int idNum = Integer.parseInt(lastId.replaceAll("[^0-9]", ""));
+        newId = String.format("%d", idNum + 1);
+    } else {
+        newId = "1";
+    }
 
+    jTextField6.setText(newId);
+    jTextField6.setEditable(false); // tránh sửa đổi tay
+}
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
+    JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Chọn file Excel");
     fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files", "xlsx"));
 
@@ -570,6 +765,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                     model.getRowCount() + 1,
                     maSP, tenSP, ram, rom, mau, soLuong, donGia
                 });
+                calculateTotal();
             }
 
             JOptionPane.showMessageDialog(this, "Đã nhập dữ liệu thành công!");
@@ -591,6 +787,42 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         model.addRow(new Object[]{sp.getMaSanPham(), sp.getTenSanPham(), sp.getSoLuong()});
     }
 }
+    private void calculateTotal() {
+    double totalAmount = 0;
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    for (int i = 0; i < model.getRowCount(); i++) {
+        int soLuong = (int) model.getValueAt(i, 6);
+        double donGia = (double) model.getValueAt(i, 7);
+        totalAmount += soLuong * donGia;
+    }
+    jTextField8.setText(String.format("%.0f", totalAmount));
+}
+
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    int row = jTable2.getSelectedRow();
+    if (row >= 0) {
+        String maSP = jTable2.getValueAt(row, 1).toString();
+        String tenSP = jTable2.getValueAt(row, 2).toString();
+        String ram = jTable2.getValueAt(row, 3).toString();
+        String rom = jTable2.getValueAt(row, 4).toString();
+        String mauSac = jTable2.getValueAt(row, 5).toString();
+        int soLuong = (int) jTable2.getValueAt(row, 6);
+        double donGia = (double) jTable2.getValueAt(row, 7);
+        String formattedDonGia = String.format("%.0f", donGia);
+
+        // Cập nhật các JTextField
+        jTextField2.setText(maSP); 
+        jTextField3.setText(tenSP);
+        jComboBox1.setSelectedItem(ram); 
+        jComboBox2.setSelectedItem(rom); 
+        jComboBox3.setSelectedItem(mauSac);
+        jTextField5.setText(String.valueOf(soLuong));
+        jTextField4.setText(formattedDonGia);
+    }
+}
+
+
 
 private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                     
     int row = jTable1.getSelectedRow(); 
@@ -609,12 +841,19 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBox1.setSelectedItem(chiTiet.getRam()); 
                 jComboBox2.setSelectedItem(chiTiet.getRom());
                 jComboBox3.setSelectedItem(chiTiet.getMauSac());
-                jTextField4.setText(String.valueOf(selectedProduct.getDonGia())); 
+                BigDecimal donGia = selectedProduct.getDonGia();
+                String formattedDonGia = donGia.setScale(0, RoundingMode.HALF_UP).toString();
+                
+                jTextField4.setText(formattedDonGia);
                 jTextField5.setText(String.valueOf(selectedProduct.getSoLuong())); 
             }
         }
     }
 }
+
+
+
+
 
     /**
      * @param args the command line arguments
@@ -662,6 +901,7 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -689,7 +929,6 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables

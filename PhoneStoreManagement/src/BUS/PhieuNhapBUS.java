@@ -63,8 +63,8 @@ public class PhieuNhapBUS {
         ArrayList<PhieuNhapDTO> result = new ArrayList<>();
         for (PhieuNhapDTO phieu : getAllList()) {
             boolean match =
-                    (maNhanVien == 0 || phieu.getMaNhanVien() == maNhanVien) &&
-                    (maNhaCungCap == 0 || phieu.getMaNhaCungCap() == maNhaCungCap) &&
+                 (maNhanVien == 0 || String.valueOf(phieu.getMaNhanVien()).equals(String.valueOf(maNhanVien))) &&
+                (maNhaCungCap == 0 || String.valueOf(phieu.getMaNhaCungCap()).equals(String.valueOf(maNhaCungCap))) &&
                     (phieu.getNgayNhap().compareTo(start) >= 0) &&
                     (phieu.getNgayNhap().compareTo(end) <= 0) &&
                     (phieu.getTongTien() >= min && phieu.getTongTien() <= max);
