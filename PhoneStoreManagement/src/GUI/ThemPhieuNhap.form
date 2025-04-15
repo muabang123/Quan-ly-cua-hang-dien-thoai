@@ -67,10 +67,7 @@
                                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                               <Component id="jLabel6" min="-2" pref="37" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jLabel14" max="32767" attributes="0"/>
-                                                  <Component id="jComboBox2" pref="145" max="32767" attributes="0"/>
-                                              </Group>
+                                              <Component id="jComboBox2" min="-2" pref="145" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -92,11 +89,7 @@
                                           <Component id="jLabel3" min="-2" pref="113" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Component id="jTextField9" min="-2" pref="119" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -153,14 +146,7 @@
                                   <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField9" min="-2" pref="31" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -302,7 +288,7 @@
         <Property name="text" type="java.lang.String" value="Th&#xea;m s&#x1ea3;n ph&#x1ea9;m"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton1.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        int selectedRow = jTable1.getSelectedRow();&#xa;        if (selectedRow == -1) {&#xa;            JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng ch&#x1ecd;n m&#x1ed9;t s&#x1ea3;n ph&#x1ea9;m tr&#x1b0;&#x1edb;c khi th&#xea;m!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;            return;&#xa;        }&#xa;        try {&#xa;            int soLuong = Integer.parseInt(jTextField5.getText().trim());&#xa;            if (soLuong &lt;= 0) {&#xa;                JOptionPane.showMessageDialog(null, &quot;S&#x1ed1; l&#x1b0;&#x1ee3;ng ph&#x1ea3;i l&#x1edb;n h&#x1a1;n 0!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;                return;&#xa;            }&#xa;        } catch (NumberFormatException e) {&#xa;            JOptionPane.showMessageDialog(null, &quot;S&#x1ed1; l&#x1b0;&#x1ee3;ng ph&#x1ea3;i l&#xe0; s&#x1ed1; nguy&#xea;n h&#x1ee3;p l&#x1ec7;!&quot;, &quot;L&#x1ed7;i nh&#x1ead;p li&#x1ec7;u&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            return;&#xa;        }&#xa;        String maSanPham = jTextField2.getText();&#xa;        String tenSanPham = jTextField3.getText();&#xa;        String ram = (String) jComboBox1.getSelectedItem();&#xa;        String rom = (String) jComboBox2.getSelectedItem();&#xa;        String mauSac = (String) jComboBox3.getSelectedItem();&#xa;        int soLuong = Integer.parseInt(jTextField5.getText());  &#xa;        double donGia = Double.parseDouble(jTextField4.getText());&#xa;&#xa;        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();&#xa;        model.addRow(new Object[]{ &#xa;            model.getRowCount() + 1,&#xa;            maSanPham, &#xa;            tenSanPham, &#xa;            ram, &#xa;            rom, &#xa;            mauSac, &#xa;            soLuong, &#xa;            donGia&#xa;        });&#xa;        calculateTotal();&#xa;        // C&#xf3; th&#x1ec3; g&#x1ecd;i ph&#x1b0;&#x1a1;ng th&#x1ee9;c l&#x1b0;u v&#xe0;o c&#x1a1; s&#x1edf; d&#x1eef; li&#x1ec7;u (n&#x1ebf;u c&#x1ea7;n) &#x1edf; &#x111;&#xe2;y&#xa;        // V&#xed; d&#x1ee5;: l&#x1b0;u th&#xf4;ng tin v&#xe0;o database ho&#x1eb7;c g&#x1ecd;i th&#xea;m logic x&#x1eed; l&#xfd; n&#x1ebf;u c&#x1ea7;n.&#xa;    }&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton1.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        int selectedRow = jTable1.getSelectedRow();&#xa;        if (selectedRow == -1) {&#xa;            JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng ch&#x1ecd;n m&#x1ed9;t s&#x1ea3;n ph&#x1ea9;m tr&#x1b0;&#x1edb;c khi th&#xea;m!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;            return;&#xa;        }&#xa;        try {&#xa;            int soLuong = Integer.parseInt(jTextField5.getText().trim());&#xa;            if (soLuong &lt;= 0) {&#xa;                JOptionPane.showMessageDialog(null, &quot;S&#x1ed1; l&#x1b0;&#x1ee3;ng ph&#x1ea3;i l&#x1edb;n h&#x1a1;n 0!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;                return;&#xa;            }&#xa;        } catch (NumberFormatException e) {&#xa;            JOptionPane.showMessageDialog(null, &quot;S&#x1ed1; l&#x1b0;&#x1ee3;ng ph&#x1ea3;i l&#xe0; s&#x1ed1; nguy&#xea;n h&#x1ee3;p l&#x1ec7;!&quot;, &quot;L&#x1ed7;i nh&#x1ead;p li&#x1ec7;u&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            return;&#xa;        }&#xa;        String maSanPham = jTextField2.getText();&#xa;        String tenSanPham = jTextField3.getText();&#xa;        String ram = (String) jComboBox1.getSelectedItem();&#xa;        String rom = (String) jComboBox2.getSelectedItem();&#xa;        String mauSac = (String) jComboBox3.getSelectedItem();&#xa;        int soLuong = Integer.parseInt(jTextField5.getText());  &#xa;        double donGia = 0;&#xa;        try {&#xa;            String donGiaText = jTextField4.getText().trim();&#xa;            if (donGiaText.contains(&quot;.&quot;) || donGiaText.contains(&quot;,&quot;)) {&#xa;                JOptionPane.showMessageDialog(null, &quot;&#x110;&#x1a1;n gi&#xe1; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c c&#xf3; d&#x1ea5;u &apos;.&apos; ho&#x1eb7;c &apos;,&apos; khi nh&#x1ead;p!&quot;, &quot;L&#x1ed7;i nh&#x1ead;p li&#x1ec7;u&quot;, JOptionPane.ERROR_MESSAGE);&#xa;                return;&#xa;            }&#xa;            donGia = Double.parseDouble(donGiaText);&#xa;            if (donGia &lt;= 0) {&#xa;                JOptionPane.showMessageDialog(null, &quot;&#x110;&#x1a1;n gi&#xe1; ph&#x1ea3;i l&#x1edb;n h&#x1a1;n 0!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;                return;&#xa;            }&#xa;        } catch (NumberFormatException e) {&#xa;            JOptionPane.showMessageDialog(null, &quot;&#x110;&#x1a1;n gi&#xe1; ph&#x1ea3;i l&#xe0; s&#x1ed1; h&#x1ee3;p l&#x1ec7;!&quot;, &quot;L&#x1ed7;i nh&#x1ead;p li&#x1ec7;u&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            return;&#xa;        }&#xa;&#xa;        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();&#xa;        model.addRow(new Object[]{ &#xa;            model.getRowCount() + 1,&#xa;            maSanPham, &#xa;            tenSanPham, &#xa;            ram, &#xa;            rom, &#xa;            mauSac, &#xa;            soLuong, &#xa;            donGia&#xa;        });&#xa;        calculateTotal();&#xa;        // C&#xf3; th&#x1ec3; g&#x1ecd;i ph&#x1b0;&#x1a1;ng th&#x1ee9;c l&#x1b0;u v&#xe0;o c&#x1a1; s&#x1edf; d&#x1eef; li&#x1ec7;u (n&#x1ebf;u c&#x1ea7;n) &#x1edf; &#x111;&#xe2;y&#xa;        // V&#xed; d&#x1ee5;: l&#x1b0;u th&#xf4;ng tin v&#xe0;o database ho&#x1eb7;c g&#x1ecd;i th&#xea;m logic x&#x1eed; l&#xfd; n&#x1ebf;u c&#x1ea7;n.&#xa;    }&#xa;});"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
@@ -333,6 +319,9 @@
     <Component class="javax.swing.JTextField" name="jTextField2">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
@@ -349,6 +338,9 @@
     <Component class="javax.swing.JTextField" name="jTextField3">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
@@ -440,6 +432,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField6">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
             </Property>
@@ -492,6 +487,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField8">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="3"/>
             </Property>
@@ -511,7 +510,7 @@
             <Property name="text" type="java.lang.String" value="Nh&#x1ead;p h&#xe0;ng"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton3.addActionListener(new java.awt.event.ActionListener() { &#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        int selectedRow = jTable1.getSelectedRow();&#xa;        if (selectedRow == -1) {&#xa;            JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng ch&#x1ecd;n m&#x1ed9;t s&#x1ea3;n ph&#x1ea9;m tr&#x1b0;&#x1edb;c khi nh&#x1ead;p h&#xe0;ng!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;            return;&#xa;        }&#xa;&#xa;        try {&#xa;            String maPhieuNhapString = jTextField6.getText().trim();&#xa;            Map&lt;String, String&gt; mapNhanVien = new HashMap&lt;&gt;();&#xa;            mapNhanVien.put(&quot;admin1&quot;, &quot;1&quot;);&#xa;            mapNhanVien.put(&quot;admin2&quot;, &quot;2&quot;);&#xa;            String tenNhanVien = (String) jComboBox5.getSelectedItem();&#xa;            String maNhanVien = mapNhanVien.get(tenNhanVien);&#xa;            String maNhaCungCap = (String) jComboBox4.getSelectedItem();&#xa;            Timestamp ngayNhap = Timestamp.from(java.time.Instant.now());&#xa;            double tongTien = Double.parseDouble(jTextField8.getText().trim());&#xa;            PhieuNhapDTO phieuNhap = new PhieuNhapDTO(maPhieuNhapString, maNhanVien, maNhaCungCap, ngayNhap, tongTien); // MaPhieuNhap l&#xe0; String&#xa;            PhieuNhapDAO phieuNhapDAO = PhieuNhapDAO.getInstance();&#xa;            int result = phieuNhapDAO.insert(phieuNhap);&#xa;&#xa;            if (result &gt; 0) {&#xa;                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();&#xa;                for (int i = 0; i &lt; model.getRowCount(); i++) {&#xa;                    String maSanPham = model.getValueAt(i, 1).toString();&#xa;                    int soLuong = (int) model.getValueAt(i, 6);&#xa;                    double donGia = (double) model.getValueAt(i, 7);&#xa;                    String ram = model.getValueAt(i, 3).toString();&#xa;                    String rom = model.getValueAt(i, 4).toString();&#xa;                    String mauSac = model.getValueAt(i, 5).toString();&#xa;                    ChiTietPhieuNhapDTO chiTiet = new ChiTietPhieuNhapDTO(maPhieuNhapString, Integer.parseInt(maSanPham), soLuong, ram, rom, mauSac, donGia);&#xa;                    ChiTietPhieuNhapDAO chiTietPhieuNhapDAO = ChiTietPhieuNhapDAO.getInstance();&#xa;                    ArrayList&lt;ChiTietPhieuNhapDTO&gt; listChiTiet = new ArrayList&lt;&gt;();&#xa;                    listChiTiet.add(chiTiet);&#xa;                    &#xa;                    SanPhamDAO sanPhamDAO = SanPhamDAO.getInstance();&#xa;                    SanPhamDTO sanPham = sanPhamDAO.selectById(maSanPham);&#xa;                    if (sanPham != null) {&#xa;                        int newSoLuong = sanPham.getSoLuong() + soLuong;&#xa;                        sanPham.setSoLuong(newSoLuong); &#xa;                        sanPhamDAO.update(sanPham); &#xa;                    }&#xa;                    ChiTietSanPhamDAO chiTietSanPhamDAO = ChiTietSanPhamDAO.getInstance();&#xa;                    ChiTietSanPhamDTO ctsanPham = ChiTietSanPhamDAO.selectByMaSP(maSanPham);&#xa;                    String chip = ctsanPham.getChip();&#xa;                    int maHang = ctsanPham.getMaHang();&#xa;                    String inch = ctsanPham.getInch();&#xa;                    String dungLuongPin = ctsanPham.getDungLuongPin();&#xa;                    ChiTietSanPhamDTO chiTietSanPham = chiTietSanPhamDAO.selectByRamRomMauSac(Integer.parseInt(maSanPham), ram, rom, mauSac);&#xa;                    if (chiTietSanPham == null) {&#xa;                        chiTietSanPham = new ChiTietSanPhamDTO(Integer.parseInt(maSanPham), maHang, chip, ram, rom, inch, dungLuongPin, mauSac);&#xa;                        chiTietSanPhamDAO.insert(chiTietSanPham);&#xa;                    }&#xa;&#xa;                    int chiTietResult = chiTietPhieuNhapDAO.insert(listChiTiet);&#xa;&#xa;                    if (chiTietResult &lt;= 0) {&#xa;                        JOptionPane.showMessageDialog(null, &quot;C&#xf3; l&#x1ed7;i khi th&#xea;m s&#x1ea3;n ph&#x1ea9;m v&#xe0;o chi ti&#x1ebf;t phi&#x1ebf;u nh&#x1ead;p!&quot;, &quot;L&#x1ed7;i&quot;, JOptionPane.ERROR_MESSAGE);&#xa;                        return;&#xa;                    }&#xa;                }&#xa;                JOptionPane.showMessageDialog(null, &quot;S&#x1ea3;n ph&#x1ea9;m &#x111;&#xe3; &#x111;&#x1b0;&#x1ee3;c th&#xea;m v&#xe0;o phi&#x1ebf;u nh&#x1ead;p!&quot;, &quot;Th&#xf4;ng b&#xe1;o&quot;, JOptionPane.INFORMATION_MESSAGE);&#xa;            } else {&#xa;                JOptionPane.showMessageDialog(null, &quot;C&#xf3; l&#x1ed7;i khi t&#x1ea1;o phi&#x1ebf;u nh&#x1ead;p!&quot;, &quot;L&#x1ed7;i&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            }&#xa;        } catch (NumberFormatException e) {&#xa;            JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng nh&#x1ead;p &#x111;&#xfa;ng &#x111;&#x1ecb;nh d&#x1ea1;ng cho t&#x1ea5;t c&#x1ea3; c&#xe1;c tr&#x1b0;&#x1edd;ng!&quot;, &quot;L&#x1ed7;i&quot;, JOptionPane.ERROR_MESSAGE);&#xa;        }&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton3.addActionListener(new java.awt.event.ActionListener() { &#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        int selectedRow = jTable1.getSelectedRow();&#xa;         if (selectedRow == -1) {&#xa;            if (jTable2.getRowCount() == 0) {&#xa;                JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng ch&#x1ecd;n m&#x1ed9;t s&#x1ea3;n ph&#x1ea9;m tr&#x1b0;&#x1edb;c khi nh&#x1ead;p h&#xe0;ng!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;                return;&#xa;            }&#xa;        }&#xa;&#xa;        try {&#xa;            String maPhieuNhapString = jTextField6.getText().trim();&#xa;            Map&lt;String, String&gt; mapNhanVien = new HashMap&lt;&gt;();&#xa;            mapNhanVien.put(&quot;admin1&quot;, &quot;1&quot;);&#xa;            mapNhanVien.put(&quot;admin2&quot;, &quot;2&quot;);&#xa;            String tenNhanVien = (String) jComboBox5.getSelectedItem();&#xa;            String maNhanVien = mapNhanVien.get(tenNhanVien);&#xa;            String maNhaCungCap = (String) jComboBox4.getSelectedItem();&#xa;            Timestamp ngayNhap = Timestamp.from(java.time.Instant.now());&#xa;            double tongTien = Double.parseDouble(jTextField8.getText().trim());&#xa;            PhieuNhapDTO phieuNhap = new PhieuNhapDTO(maPhieuNhapString, maNhanVien, maNhaCungCap, ngayNhap, tongTien); // MaPhieuNhap l&#xe0; String&#xa;            PhieuNhapDAO phieuNhapDAO = PhieuNhapDAO.getInstance();&#xa;            int result = phieuNhapDAO.insert(phieuNhap);&#xa;&#xa;            if (result &gt; 0) {&#xa;                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();&#xa;                for (int i = 0; i &lt; model.getRowCount(); i++) {&#xa;                    String maSanPham = model.getValueAt(i, 1).toString();&#xa;                    int soLuong = (int) model.getValueAt(i, 6);&#xa;                    double donGia = (double) model.getValueAt(i, 7);&#xa;                    String ram = model.getValueAt(i, 3).toString();&#xa;                    String rom = model.getValueAt(i, 4).toString();&#xa;                    String mauSac = model.getValueAt(i, 5).toString();&#xa;                    ChiTietPhieuNhapDTO chiTiet = new ChiTietPhieuNhapDTO(maPhieuNhapString, Integer.parseInt(maSanPham), soLuong, ram, rom, mauSac, donGia);&#xa;                    ChiTietPhieuNhapDAO chiTietPhieuNhapDAO = ChiTietPhieuNhapDAO.getInstance();&#xa;                    ArrayList&lt;ChiTietPhieuNhapDTO&gt; listChiTiet = new ArrayList&lt;&gt;();&#xa;                    listChiTiet.add(chiTiet);&#xa;                    &#xa;                    SanPhamDAO sanPhamDAO = SanPhamDAO.getInstance();&#xa;                    SanPhamDTO sanPham = sanPhamDAO.selectById(maSanPham);&#xa;                    if (sanPham != null) {&#xa;                        int newSoLuong = sanPham.getSoLuong() + soLuong;&#xa;                        sanPham.setSoLuong(newSoLuong); &#xa;                        sanPhamDAO.update(sanPham); &#xa;                    }&#xa;                    ChiTietSanPhamDAO chiTietSanPhamDAO = ChiTietSanPhamDAO.getInstance();&#xa;                    ChiTietSanPhamDTO ctsanPham = ChiTietSanPhamDAO.selectByMaSP(maSanPham);&#xa;                    String chip = ctsanPham.getChip();&#xa;                    int maHang = ctsanPham.getMaHang();&#xa;                    String inch = ctsanPham.getInch();&#xa;                    String dungLuongPin = ctsanPham.getDungLuongPin();&#xa;                    ChiTietSanPhamDTO chiTietSanPham = chiTietSanPhamDAO.selectByRamRomMauSac(Integer.parseInt(maSanPham), ram, rom, mauSac);&#xa;                    if (chiTietSanPham == null) {&#xa;                        chiTietSanPham = new ChiTietSanPhamDTO(Integer.parseInt(maSanPham), maHang, chip, ram, rom, inch, dungLuongPin, mauSac);&#xa;                        chiTietSanPhamDAO.insert(chiTietSanPham);&#xa;                    }&#xa;&#xa;                    int chiTietResult = chiTietPhieuNhapDAO.insert(listChiTiet);&#xa;&#xa;                    if (chiTietResult &lt;= 0) {&#xa;                        JOptionPane.showMessageDialog(null, &quot;C&#xf3; l&#x1ed7;i khi th&#xea;m s&#x1ea3;n ph&#x1ea9;m v&#xe0;o chi ti&#x1ebf;t phi&#x1ebf;u nh&#x1ead;p!&quot;, &quot;L&#x1ed7;i&quot;, JOptionPane.ERROR_MESSAGE);&#xa;                        return;&#xa;                    }&#xa;                }&#xa;                JOptionPane.showMessageDialog(null, &quot;S&#x1ea3;n ph&#x1ea9;m &#x111;&#xe3; &#x111;&#x1b0;&#x1ee3;c th&#xea;m v&#xe0;o phi&#x1ebf;u nh&#x1ead;p!&quot;, &quot;Th&#xf4;ng b&#xe1;o&quot;, JOptionPane.INFORMATION_MESSAGE);&#xa;            } else {&#xa;                JOptionPane.showMessageDialog(null, &quot;C&#xf3; l&#x1ed7;i khi t&#x1ea1;o phi&#x1ebf;u nh&#x1ead;p!&quot;, &quot;L&#x1ed7;i&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            }&#xa;        } catch (NumberFormatException e) {&#xa;            JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng nh&#x1ead;p &#x111;&#xfa;ng &#x111;&#x1ecb;nh d&#x1ea1;ng cho t&#x1ea5;t c&#x1ea3; c&#xe1;c tr&#x1b0;&#x1edd;ng!&quot;, &quot;L&#x1ed7;i&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            return;&#xa;        }&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox5">
@@ -789,21 +788,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton5.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        int selectedRow = jTable2.getSelectedRow();&#xa;        if (selectedRow == -1) {&#xa;            JOptionPane.showMessageDialog(null, &quot;Vui l&#xf2;ng ch&#x1ecd;n m&#x1ed9;t s&#x1ea3;n ph&#x1ea9;m &#x111;&#x1ec3; x&#xf3;a!&quot;, &quot;C&#x1ea3;nh b&#xe1;o&quot;, JOptionPane.WARNING_MESSAGE);&#xa;        } else {&#xa;            int confirm = JOptionPane.showConfirmDialog(null, &quot;B&#x1ea1;n c&#xf3; ch&#x1eaf;c ch&#x1eaf;n mu&#x1ed1;n x&#xf3;a s&#x1ea3;n ph&#x1ea9;m n&#xe0;y?&quot;, &quot;X&#xe1;c nh&#x1ead;n&quot;, JOptionPane.YES_NO_OPTION);&#xa;            if (confirm == JOptionPane.YES_OPTION) {&#xa;                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();&#xa;                model.removeRow(selectedRow);&#xa;                calculateTotal();&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel14">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i S&#x1ea3;n ph&#x1ea9;m"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField9">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="0"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

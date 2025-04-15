@@ -97,8 +97,6 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -190,12 +188,14 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jLabel2.setText("Mã sản phẩm");
 
         jTextField2.setEditable(false);
+        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
         jTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Tên sản phẩm");
 
         jTextField3.setEditable(false);
+        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
         jTextField3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -203,6 +203,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setText("Mã phiếu nhập");
 
+        jTextField6.setBackground(new java.awt.Color(204, 204, 204));
         jTextField6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -218,6 +219,8 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
         jLabel13.setText("TỔNG TIỀN:");
 
+        jTextField8.setEditable(false);
+        jTextField8.setBackground(new java.awt.Color(204, 255, 255));
         jTextField8.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         jTextField8.setBorder(null);
 
@@ -285,8 +288,10 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int selectedRow = jTable1.getSelectedRow();
                 if (selectedRow == -1) {
-                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một sản phẩm trước khi nhập hàng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                    return;
+                    if (jTable2.getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng chọn một sản phẩm trước khi nhập hàng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                 }
 
                 try {
@@ -349,6 +354,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                     }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đúng định dạng cho tất cả các trường!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
             }
         });
@@ -444,11 +450,6 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Xóa sản phẩm");
 
-        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel14.setText("Loại Sản phẩm");
-
-        jTextField9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -483,9 +484,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                                                 .addGap(44, 44, 44)
                                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jComboBox2, 0, 145, Short.MAX_VALUE)))))
+                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,10 +498,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                                                 .addGap(6, 6, 6)
                                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -546,12 +542,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -615,7 +606,22 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
                 String rom = (String) jComboBox2.getSelectedItem();
                 String mauSac = (String) jComboBox3.getSelectedItem();
                 int soLuong = Integer.parseInt(jTextField5.getText());
-                double donGia = Double.parseDouble(jTextField4.getText());
+                double donGia = 0;
+                try {
+                    String donGiaText = jTextField4.getText().trim();
+                    if (donGiaText.contains(".") || donGiaText.contains(",")) {
+                        JOptionPane.showMessageDialog(null, "Đơn giá không được có dấu '.' hoặc ',' khi nhập!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    donGia = Double.parseDouble(donGiaText);
+                    if (donGia <= 0) {
+                        JOptionPane.showMessageDialog(null, "Đơn giá phải lớn hơn 0!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Đơn giá phải là số hợp lệ!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
                 model.addRow(new Object[]{
@@ -908,7 +914,6 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -930,6 +935,5 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

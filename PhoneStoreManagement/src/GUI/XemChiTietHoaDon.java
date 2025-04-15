@@ -4,7 +4,9 @@
  */
 package GUI;
 import BUS.SanPhamBUS;
+import DAO.ChiTietHoaDonDAO;
 import DAO.ChiTietPhieuNhapDAO;
+import DTO.ChiTietHoaDonDTO;
 import DTO.ChiTietPhieuNhapDTO;
 import DTO.SanPhamDTO;
 import java.text.DecimalFormat;
@@ -26,25 +28,27 @@ import javax.swing.JOptionPane;
  *
  * @author minhminh
  */
-public class XemChiTietPhieuNhap extends javax.swing.JFrame {
+public class XemChiTietHoaDon extends javax.swing.JFrame {
 
     /**
      * Creates new form XemChiTietPhieuNhap
      */
-    public XemChiTietPhieuNhap() {
+    public XemChiTietHoaDon() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
-    public void setPhieuNhapInfo(String maPhieu, String tenNV, String tenNCC, String ngayNhap) {
+    public void setHoaDonInfo(String maPhieu, String tenNV, String maKhachHang, String ngayNhap) {
     jTextField1.setText(maPhieu);
     jTextField2.setText(tenNV);
-    jTextField3.setText(tenNCC);
+    jTextField3.setText(maKhachHang);
 
     try {
+        
         // Chuyển từ String thành Date
         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy/MM/dd");  // Định dạng chuỗi ngày từ cơ sở dữ liệu
         Date parsedDate = originalFormat.parse(ngayNhap);
+        
 
         // Định dạng lại Date để chỉ hiển thị ngày (không có giờ)
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -89,7 +93,7 @@ public class XemChiTietPhieuNhap extends javax.swing.JFrame {
         jPanel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setText("Thông Tin Phiếu Nhập");
+        jLabel1.setText("Thông Tin Hóa Đơn");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,7 +123,7 @@ public class XemChiTietPhieuNhap extends javax.swing.JFrame {
         jTextField2.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setText("Nhà Cung Cấp");
+        jLabel4.setText("Mã Khách Hàng");
 
         jTextField3.setEditable(false);
 
@@ -136,22 +140,22 @@ public class XemChiTietPhieuNhap extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(204, 204, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng", "RAM", "ROM", "Màu Sắc", "Đơn Giá"
+                "STT", "Mã SP", "TênSP", "Số lượng", "RAM", "ROM", "Màu Sắc", "Đơn Giá", "Thành Tiền", "Phải Trả"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -228,60 +232,93 @@ public class XemChiTietPhieuNhap extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-    try {
+        try {
         Document document = new Document();
-        String maPhieuNhap = jTextField1.getText().trim();
-        String fileName = "PhieuNhap_" + maPhieuNhap + ".pdf";
+        String maHoaDon = jTextField1.getText().trim();
+        String fileName = "HoaDon_" + maHoaDon + ".pdf";
 
+        // Mở file output stream để ghi PDF
         FileOutputStream fos = new FileOutputStream(fileName);
         PdfWriter writer = PdfWriter.getInstance(document, fos);
         document.open();
+        
+        // Định nghĩa font cho PDF
         String fontPath = "lib\\TimesNewRoman\\SVN-Times New Roman.ttf";  
         BaseFont baseFont = BaseFont.createFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         Font timesNewRomanFont = new Font(baseFont, 12);
+
+        // Tiêu đề chính
         Paragraph title = new Paragraph("Hệ thống quản lý điện thoại\n", new Font(baseFont, 16, Font.BOLD));
         title.setAlignment(Element.ALIGN_CENTER);
         document.add(title);
+
+        // Hiển thị thời gian hiện tại
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String currentDate = sdf.format(new Date());
-        Paragraph dateParagraph = new Paragraph("Thời gian in phiếu: " + currentDate, new Font(baseFont, 12));
+        Paragraph dateParagraph = new Paragraph("Thời gian in hóa đơn: " + currentDate, new Font(baseFont, 12));
         dateParagraph.setAlignment(Element.ALIGN_CENTER);
         document.add(dateParagraph);
-        Paragraph infoTitle = new Paragraph("THÔNG TIN PHIẾU NHẬP", new Font(baseFont, 14, Font.BOLD));
+
+        // Tiêu đề thông tin hóa đơn
+        Paragraph infoTitle = new Paragraph("THÔNG TIN HÓA ĐƠN", new Font(baseFont, 14, Font.BOLD));
         infoTitle.setSpacingBefore(10);
         document.add(infoTitle);
-        document.add(new Paragraph("Mã phiếu: " + jTextField1.getText(), timesNewRomanFont));
-        document.add(new Paragraph("Nhà cung cấp: " + jTextField3.getText(), timesNewRomanFont));
-        document.add(new Paragraph("Người thực hiện: " + jTextField2.getText(), timesNewRomanFont));
+
+        // Thêm thông tin hóa đơn vào PDF
+        document.add(new Paragraph("Mã hóa đơn: " + maHoaDon, timesNewRomanFont));
+        document.add(new Paragraph("Nhân viên nhập: " + jTextField2.getText(), timesNewRomanFont));
+        document.add(new Paragraph("Mã khách hàng: " + jTextField3.getText(), timesNewRomanFont));
         document.add(new Paragraph("Thời gian nhập: " + jTextField4.getText(), timesNewRomanFont));
         document.add(new Paragraph("\n"));
-        PdfPTable table = new PdfPTable(8);
+
+        // Tạo bảng chi tiết hóa đơn
+        PdfPTable table = new PdfPTable(10); // 10 cột: STT, Mã SP, Tên SP, Số Lượng, RAM, ROM, Màu sắc, Đơn giá, Thành tiền, Phải trả
         table.setWidthPercentage(100);
+
+        // Thêm tiêu đề cho bảng
         table.addCell(new Phrase("STT", timesNewRomanFont));
         table.addCell(new Phrase("Mã SP", timesNewRomanFont));
         table.addCell(new Phrase("Tên SP", timesNewRomanFont));
+        table.addCell(new Phrase("Số Lượng", timesNewRomanFont));
         table.addCell(new Phrase("RAM", timesNewRomanFont));
         table.addCell(new Phrase("ROM", timesNewRomanFont));
         table.addCell(new Phrase("Màu sắc", timesNewRomanFont));
         table.addCell(new Phrase("Đơn giá", timesNewRomanFont));
-        table.addCell(new Phrase("Số lượng", timesNewRomanFont));
+        table.addCell(new Phrase("Thành tiền", timesNewRomanFont));
+        table.addCell(new Phrase("Phải trả", timesNewRomanFont));
+
+        // Lấy dữ liệu từ jTable1
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
+            // Thêm dữ liệu vào từng dòng trong bảng PDF
             table.addCell(new Phrase(String.valueOf(i + 1), timesNewRomanFont)); // STT
             table.addCell(new Phrase(model.getValueAt(i, 1).toString(), timesNewRomanFont)); // Mã SP
             table.addCell(new Phrase(model.getValueAt(i, 2).toString(), timesNewRomanFont)); // Tên SP
-            table.addCell(new Phrase(model.getValueAt(i, 3).toString(), timesNewRomanFont)); // RAM
-            table.addCell(new Phrase(model.getValueAt(i, 4).toString(), timesNewRomanFont)); // ROM
-            table.addCell(new Phrase(model.getValueAt(i, 5).toString(), timesNewRomanFont)); // Màu sắc
-            table.addCell(new Phrase(model.getValueAt(i, 6).toString(), timesNewRomanFont)); // Đơn giá
-            table.addCell(new Phrase(model.getValueAt(i, 7).toString(), timesNewRomanFont)); // Số lượng
+            table.addCell(new Phrase(model.getValueAt(i, 3).toString(), timesNewRomanFont)); // Số Lượng
+            table.addCell(new Phrase(model.getValueAt(i, 4).toString(), timesNewRomanFont)); // RAM
+            table.addCell(new Phrase(model.getValueAt(i, 5).toString(), timesNewRomanFont)); // ROM
+            table.addCell(new Phrase(model.getValueAt(i, 6).toString(), timesNewRomanFont)); // Màu sắc
+            table.addCell(new Phrase(model.getValueAt(i, 7).toString(), timesNewRomanFont)); // Đơn giá
+
+            // Lấy giá trị "Thành tiền" và "Phải trả" trực tiếp từ bảng mà không cần tính toán
+            String thanhTien = model.getValueAt(i, 8).toString(); // Thành tiền
+            String phaiTra = model.getValueAt(i, 9).toString();  // Phải trả
+
+            // Thêm thành tiền và số tiền phải trả vào bảng
+            table.addCell(new Phrase(thanhTien, timesNewRomanFont)); // Thành tiền
+            table.addCell(new Phrase(phaiTra, timesNewRomanFont));  // Phải trả
         }
 
+        // Thêm bảng vào document
         document.add(table);
-        Paragraph signParagraph = new Paragraph("\n\nNgười lập phiếu                              Nhân viên nhận                              Nhà cung cấp\n" +
+
+        // Thêm phần ký tên vào hóa đơn
+        Paragraph signParagraph = new Paragraph("\n\nNgười lập phiếu                              Nhân viên nhận                              Khách Hàng\n" +
         "         (Ký và ghi rõ họ tên)                       (Ký và ghi rõ họ tên)                     (Ký và ghi rõ họ tên)", timesNewRomanFont);
         signParagraph.setAlignment(Element.ALIGN_CENTER);
         document.add(signParagraph);
+
+        // Đóng tài liệu PDF
         document.close();
         JOptionPane.showMessageDialog(this, "Xuất file PDF thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     } catch (DocumentException | HeadlessException | IOException e) {
@@ -296,38 +333,53 @@ public class XemChiTietPhieuNhap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField4ActionPerformed
     
-    public void loadChiTietPhieuNhap(String maPhieuNhap) {
-    ChiTietPhieuNhapDAO dao = ChiTietPhieuNhapDAO.getInstance();
+    public void loadChiTietHoaDon(String maHoaDon) {
+    ChiTietHoaDonDAO dao = ChiTietHoaDonDAO.getInstance();
     SanPhamBUS sanPhamBUS = new SanPhamBUS();
     DecimalFormat df = new DecimalFormat("#,##0");
 
-    ArrayList<ChiTietPhieuNhapDTO> list = dao.selectAll(maPhieuNhap);
+    // Lấy danh sách chi tiết hóa đơn
+    ArrayList<ChiTietHoaDonDTO> list = dao.selectAll(maHoaDon);
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
     model.setRowCount(0); // clear bảng
 
     int stt = 1;
-    for (ChiTietPhieuNhapDTO ct : list) {
+    for (ChiTietHoaDonDTO ct : list) {
         String tenSP = "";
+        // Lấy thông tin sản phẩm từ MaSanPham
         SanPhamDTO sp = sanPhamBUS.getByMaSP(ct.getMaSanPham());
         if (sp != null) {
             tenSP = sp.getTenSanPham();
         }
 
+        // Định dạng đơn giá
         String donGiaFormatted = df.format(ct.getDonGia());
+        // Tính thành tiền
+        double thanhTien = ct.getSoLuong() * ct.getDonGia();
+        String thanhTienFormatted = df.format(thanhTien);
 
-        model.addRow(new Object[]{
-            stt++,
-            ct.getMaSanPham(),
-            tenSP,
-            ct.getRam(),
-            ct.getRom(),
-            ct.getMauSac(),
-            donGiaFormatted,
-            ct.getSoLuong()
+        // Định dạng số tiền còn lại
+        String soTienConLaiFormatted = df.format(ct.getSoTienConLai());
+
+        // Thêm dòng vào bảng
+        model.addRow(new Object[] {
+            stt++,                              // STT
+            ct.getMaSanPham(),                 // Mã sản phẩm
+            tenSP,                             // Tên sản phẩm
+            ct.getSoLuong(),                   // Số lượng
+            ct.getRam(),                       // RAM
+            ct.getRom(),                       // ROM
+            ct.getMauSac(),                    // Màu sắc
+            donGiaFormatted,                   // Đơn giá
+            thanhTienFormatted,                // Thành tiền
+            soTienConLaiFormatted              // Số tiền còn lại
         });
     }
+
+    // Không cho phép chỉnh sửa các cột trong bảng
     jTable1.setDefaultEditor(Object.class, null);
 }
+
     
     /**
      * @param args the command line arguments
@@ -346,20 +398,20 @@ public class XemChiTietPhieuNhap extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(XemChiTietPhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemChiTietHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(XemChiTietPhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemChiTietHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(XemChiTietPhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemChiTietHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(XemChiTietPhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemChiTietHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new XemChiTietPhieuNhap().setVisible(true);
+                new XemChiTietHoaDon().setVisible(true);
             }
         });
     }

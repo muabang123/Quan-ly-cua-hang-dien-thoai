@@ -80,7 +80,7 @@ CREATE TABLE ChiTietPhieuNhap (
     Rom VARCHAR(50),
     MauSac VARCHAR(50),
     DonGia DECIMAL(20,2) NOT NULL,
-    PRIMARY KEY (MaPhieuNhap, MaSanPham),
+    PRIMARY KEY (MaPhieuNhap, MaSanPham, Ram, Rom, MauSac),  -- 5 khóa chính
     FOREIGN KEY (MaPhieuNhap) REFERENCES PhieuNhap(MaPhieuNhap) ON DELETE CASCADE,
     FOREIGN KEY (MaSanPham) REFERENCES SanPham(MaSanPham) ON DELETE CASCADE
 );
@@ -116,11 +116,12 @@ CREATE TABLE ChiTietHoaDon (
     MauSac VARCHAR(50),
     DonGia DECIMAL(20,2) NOT NULL,
     ThanhTien DECIMAL(20,2),
-    TienGiamGiaConLai DECIMAL(20,2),
-    PRIMARY KEY (MaHoaDon, MaSanPham),
+    SoTienConLai DECIMAL(20,2),
+    PRIMARY KEY (MaHoaDon, MaSanPham, Ram, Rom, MauSac),  -- 5 khóa chính
     FOREIGN KEY (MaHoaDon) REFERENCES HoaDon(MaHoaDon) ON DELETE CASCADE,
     FOREIGN KEY (MaSanPham) REFERENCES SanPham(MaSanPham) ON DELETE CASCADE
 );
+
 
 -- Tạo bảng Chương Trình Khuyến Mãi
 CREATE TABLE ChuongTrinhKM (
@@ -258,7 +259,7 @@ INSERT INTO `hoadon` (`MaHoaDon`, `NgayLapHoaDon`, `MaNhanVien`, `MaKhachHang`, 
 (2, '2024-03-23', 3, 2, 39990000.00, 37990000.00);
 
 -- 8. Chi tiết hóa đơn (phụ thuộc hóa đơn và sản phẩm)
-INSERT INTO `chitiethoadon` (`MaHoaDon`, `MaSanPham`, `SoLuong`, `Ram`, `Rom`, `MauSac`, `DonGia`, `ThanhTien`, `TienGiamGiaConLai`) VALUES
+INSERT INTO `chitiethoadon` (`MaHoaDon`, `MaSanPham`, `SoLuong`, `Ram`, `Rom`, `MauSac`, `DonGia`, `ThanhTien`, `SoTienConLai`) VALUES
 (1, 2, 1, '12GB', '256GB', 'Đen', 21990000.00, 21990000.00, 20990000.00),
 (2, 4, 1, '32GB', '1TB', 'Đỏ', 39990000.00, 39990000.00, 37990000.00);
 

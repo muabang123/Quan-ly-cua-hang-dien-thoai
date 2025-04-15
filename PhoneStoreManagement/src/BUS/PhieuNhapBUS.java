@@ -46,33 +46,4 @@ public class PhieuNhapBUS {
         return phieuNhapDAO.getAutoIncrement();
     }
 
-    public ArrayList<PhieuNhapDTO> filterPhieuNhap(int maNhaCungCap, int maNhanVien, Date startDate, Date endDate, String minPrice, String maxPrice) {
-        long min = !minPrice.isEmpty() ? Long.parseLong(minPrice) : 0L;
-        long max = !maxPrice.isEmpty() ? Long.parseLong(maxPrice) : Long.MAX_VALUE;
-
-        Timestamp start = new Timestamp(startDate.getTime());
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(endDate);
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 59);
-        cal.set(Calendar.MILLISECOND, 999);
-        Timestamp end = new Timestamp(cal.getTimeInMillis());
-
-        ArrayList<PhieuNhapDTO> result = new ArrayList<>();
-        for (PhieuNhapDTO phieu : getAllList()) {
-            boolean match =
-                 (maNhanVien == 0 || String.valueOf(phieu.getMaNhanVien()).equals(String.valueOf(maNhanVien))) &&
-                (maNhaCungCap == 0 || String.valueOf(phieu.getMaNhaCungCap()).equals(String.valueOf(maNhaCungCap))) &&
-                    (phieu.getNgayNhap().compareTo(start) >= 0) &&
-                    (phieu.getNgayNhap().compareTo(end) <= 0) &&
-                    (phieu.getTongTien() >= min && phieu.getTongTien() <= max);
-
-            if (match) {
-                result.add(phieu);
-            }
-        }
-        return result;
-    }
 }
