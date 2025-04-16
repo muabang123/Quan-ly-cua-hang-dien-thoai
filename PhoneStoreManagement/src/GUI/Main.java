@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import BUS.ChiTietSanPhamBUS;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +14,7 @@ import DTO.PhieuNhapDTO;
 import BUS.SanPhamBUS;
 import DTO.SanPhamDTO;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -43,6 +45,7 @@ public class Main extends javax.swing.JFrame {
         panelContent.add(pNhaCungCap, "NhaCungCap");
         panelContent.add(pNhanVien, "NhanVien");
         panelContent.add(pThongKe, "ThongKe");
+        panelContent.add(pThuocTinh, "ThuocTinh");
         
       JTableSanPham.getTableHeader().setForeground(Color.BLACK);      // Đổi màu chữ
       JTableSanPham.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14)); // Đổi font chữ
@@ -71,6 +74,7 @@ public class Main extends javax.swing.JFrame {
         btnNhanVien = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        btnThuocTinh = new javax.swing.JButton();
         panelContent = new javax.swing.JPanel();
         pSanPham = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -88,6 +92,8 @@ public class Main extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         TextFieldSearch = new javax.swing.JTextField();
         Buttonrefesh = new javax.swing.JButton();
+        jButtonNhanSanPham = new javax.swing.JButton();
+        jLabel83 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         JTableSanPham = new javax.swing.JTable();
@@ -204,6 +210,13 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        pThuocTinh = new javax.swing.JPanel();
+        jButtonHang = new javax.swing.JButton();
+        jButtonLoai = new javax.swing.JButton();
+        jLabelHang = new javax.swing.JLabel();
+        jLabelLoai = new javax.swing.JLabel();
+        jButtonKhuyenMai = new javax.swing.JButton();
+        jLabelLoai1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ thống quản lí");
@@ -234,6 +247,7 @@ public class Main extends javax.swing.JFrame {
 
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-home-26.png"))); // NOI18N
         btnHome.setText("Trang chủ");
@@ -246,6 +260,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-order-26.png"))); // NOI18N
         btnHoaDon.setText("Hóa đơn");
@@ -258,6 +273,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnPhieuNhap.setBackground(new java.awt.Color(255, 255, 255));
         btnPhieuNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPhieuNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-create-order-26.png"))); // NOI18N
         btnPhieuNhap.setText("Phiếu nhập ");
@@ -270,6 +286,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnNhaCungCap.setBackground(new java.awt.Color(255, 255, 255));
         btnNhaCungCap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNhaCungCap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-supplier-26.png"))); // NOI18N
         btnNhaCungCap.setText("Nhà Cung cấp");
@@ -282,6 +299,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnSanPham.setBackground(new java.awt.Color(255, 255, 255));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-smartphones-26.png"))); // NOI18N
         btnSanPham.setText("Sản phẩm");
@@ -294,6 +312,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-customer-26.png"))); // NOI18N
         btnKhachHang.setText("Khách hàng ");
@@ -306,6 +325,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnNhanVien.setBackground(new java.awt.Color(255, 255, 255));
         btnNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-employee-26.png"))); // NOI18N
         btnNhanVien.setText("Nhân viên");
@@ -318,6 +338,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnThongKe.setBackground(new java.awt.Color(255, 255, 255));
         btnThongKe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-statistics-26.png"))); // NOI18N
         btnThongKe.setText("Thống kê");
@@ -330,6 +351,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnExit.setBackground(new java.awt.Color(255, 255, 255));
         btnExit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-power-off-26.png"))); // NOI18N
         btnExit.setText("Thoát");
@@ -342,6 +364,19 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnThuocTinh.setBackground(new java.awt.Color(255, 255, 255));
+        btnThuocTinh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnThuocTinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-product-26.png"))); // NOI18N
+        btnThuocTinh.setText("Thuộc tính");
+        btnThuocTinh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThuocTinh.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnThuocTinh.setIconTextGap(10);
+        btnThuocTinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThuocTinhActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
@@ -351,13 +386,14 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPhieuNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNhaCungCap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                     .addComponent(btnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThuocTinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPhieuNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelMenuLayout.setVerticalGroup(
@@ -367,6 +403,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnThuocTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPhieuNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,9 +417,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194)
+                .addGap(252, 252, 252)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         panelContent.setBackground(new java.awt.Color(255, 153, 204));
@@ -392,6 +430,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButtonThemSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonThemSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButtonThemSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,6 +438,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButtonSuaSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonSuaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButtonSuaSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,6 +446,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButtonXoaSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonXoaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButtonXoaSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +454,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButtonChiTietSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonChiTietSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
         jButtonChiTietSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -420,6 +462,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButtonXuatSanPham.setBackground(new java.awt.Color(255, 255, 255));
         jButtonXuatSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButtonXuatSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -447,6 +490,7 @@ public class Main extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(51, 51, 255));
         jLabel22.setText("THÊM");
 
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,8 +498,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        TextFieldSearch.setBackground(new java.awt.Color(255, 255, 255));
         TextFieldSearch.setText("Nhập nội dung  tìm kiếm ...");
 
+        Buttonrefesh.setBackground(new java.awt.Color(255, 255, 255));
         Buttonrefesh.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Buttonrefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-30.png"))); // NOI18N
         Buttonrefesh.setText("  Làm mới");
@@ -464,6 +510,18 @@ public class Main extends javax.swing.JFrame {
                 ButtonrefeshActionPerformed(evt);
             }
         });
+
+        jButtonNhanSanPham.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonNhanSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
+        jButtonNhanSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNhanSanPhamActionPerformed(evt);
+            }
+        });
+
+        jLabel83.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel83.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel83.setText("NHẬP");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -493,6 +551,8 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel83)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,7 +561,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButtonChiTietSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonXuatSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonNhanSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 365, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(TextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -520,7 +582,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jButtonThemSanPham)
                             .addComponent(jButtonXoaSanPham)
                             .addComponent(jButtonChiTietSanPham)
-                            .addComponent(jButtonXuatSanPham))
+                            .addComponent(jButtonXuatSanPham)
+                            .addComponent(jButtonNhanSanPham))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -531,13 +594,15 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
-                    .addComponent(jLabel21))
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel83))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        JTableSanPham.setBackground(new java.awt.Color(255, 255, 255));
         JTableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
@@ -555,9 +620,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JTableSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        JTableSanPham.setGridColor(new java.awt.Color(255, 255, 255));
+        JTableSanPham.setGridColor(new java.awt.Color(255, 0, 0));
         JTableSanPham.setRowHeight(30);
-        JTableSanPham.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        JTableSanPham.setSelectionBackground(new java.awt.Color(51, 51, 255));
         JTableSanPham.setSelectionForeground(new java.awt.Color(255, 255, 255));
         JTableSanPham.setShowGrid(true);
         JTableSanPham.getTableHeader().setResizingAllowed(false);
@@ -577,8 +642,8 @@ public class Main extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pSanPhamLayout = new javax.swing.GroupLayout(pSanPham);
@@ -599,7 +664,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(314, Short.MAX_VALUE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
 
         panelContent.add(pSanPham, "card3");
@@ -609,6 +674,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton37.setBackground(new java.awt.Color(255, 255, 255));
         jButton37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -616,6 +682,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton38.setBackground(new java.awt.Color(255, 255, 255));
         jButton38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton38.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -623,6 +690,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton39.setBackground(new java.awt.Color(255, 255, 255));
         jButton39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton39.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -630,8 +698,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton40.setBackground(new java.awt.Color(255, 255, 255));
         jButton40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
+        jButton42.setBackground(new java.awt.Color(255, 255, 255));
         jButton42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton42.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,6 +729,7 @@ public class Main extends javax.swing.JFrame {
         jLabel64.setForeground(new java.awt.Color(51, 51, 255));
         jLabel64.setText("THÊM");
 
+        jButton48.setBackground(new java.awt.Color(255, 255, 255));
         jButton48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton48.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -706,7 +777,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(791, Short.MAX_VALUE))
+                .addContainerGap(902, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,7 +841,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -878,7 +949,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton54, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton55, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(789, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -918,7 +989,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pPhieuXuatLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1000, Short.MAX_VALUE))
+                .addContainerGap(1018, Short.MAX_VALUE))
         );
 
         panelContent.add(pPhieuXuat, "card5");
@@ -928,6 +999,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton56.setBackground(new java.awt.Color(255, 255, 255));
         jButton56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton56.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -935,6 +1007,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton57.setBackground(new java.awt.Color(255, 255, 255));
         jButton57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton57.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -942,6 +1015,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton58.setBackground(new java.awt.Color(255, 255, 255));
         jButton58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton58.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -949,8 +1023,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton59.setBackground(new java.awt.Color(255, 255, 255));
         jButton59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
+        jButton61.setBackground(new java.awt.Color(255, 255, 255));
         jButton61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton61.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -978,6 +1054,7 @@ public class Main extends javax.swing.JFrame {
         jLabel85.setForeground(new java.awt.Color(51, 51, 255));
         jLabel85.setText("THÊM");
 
+        jButton62.setBackground(new java.awt.Color(255, 255, 255));
         jButton62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton62.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1025,7 +1102,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton62, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(783, Short.MAX_VALUE))
+                .addContainerGap(894, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1065,7 +1142,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1000, Short.MAX_VALUE))
+                .addContainerGap(1018, Short.MAX_VALUE))
         );
 
         panelContent.add(pHoaDon, "card6");
@@ -1075,6 +1152,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton63.setBackground(new java.awt.Color(255, 255, 255));
         jButton63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton63.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1082,6 +1160,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton64.setBackground(new java.awt.Color(255, 255, 255));
         jButton64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton64.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1089,6 +1168,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton65.setBackground(new java.awt.Color(255, 255, 255));
         jButton65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton65.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1096,8 +1176,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton66.setBackground(new java.awt.Color(255, 255, 255));
         jButton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
+        jButton68.setBackground(new java.awt.Color(255, 255, 255));
         jButton68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton68.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1125,6 +1207,7 @@ public class Main extends javax.swing.JFrame {
         jLabel93.setForeground(new java.awt.Color(51, 51, 255));
         jLabel93.setText("THÊM");
 
+        jButton69.setBackground(new java.awt.Color(255, 255, 255));
         jButton69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton69.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1172,7 +1255,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton68, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton69, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(783, Short.MAX_VALUE))
+                .addContainerGap(894, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1212,7 +1295,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pKhachHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1000, Short.MAX_VALUE))
+                .addContainerGap(1018, Short.MAX_VALUE))
         );
 
         panelContent.add(pKhachHang, "card7");
@@ -1222,6 +1305,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton70.setBackground(new java.awt.Color(255, 255, 255));
         jButton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton70.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1229,6 +1313,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton71.setBackground(new java.awt.Color(255, 255, 255));
         jButton71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton71.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1236,6 +1321,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton72.setBackground(new java.awt.Color(255, 255, 255));
         jButton72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton72.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1243,8 +1329,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton73.setBackground(new java.awt.Color(255, 255, 255));
         jButton73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
+        jButton75.setBackground(new java.awt.Color(255, 255, 255));
         jButton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton75.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1272,6 +1360,7 @@ public class Main extends javax.swing.JFrame {
         jLabel101.setForeground(new java.awt.Color(51, 51, 255));
         jLabel101.setText("THÊM");
 
+        jButton76.setBackground(new java.awt.Color(255, 255, 255));
         jButton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton76.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1319,7 +1408,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton75, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton76, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(783, Short.MAX_VALUE))
+                .addContainerGap(894, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1359,7 +1448,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pNhaCungCapLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1000, Short.MAX_VALUE))
+                .addContainerGap(1018, Short.MAX_VALUE))
         );
 
         panelContent.add(pNhaCungCap, "card8");
@@ -1369,6 +1458,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton77.setBackground(new java.awt.Color(255, 255, 255));
         jButton77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-50.png"))); // NOI18N
         jButton77.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1376,6 +1466,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton78.setBackground(new java.awt.Color(255, 255, 255));
         jButton78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-pencil-50.png"))); // NOI18N
         jButton78.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1383,6 +1474,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton79.setBackground(new java.awt.Color(255, 255, 255));
         jButton79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-bin-50.png"))); // NOI18N
         jButton79.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1390,8 +1482,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton80.setBackground(new java.awt.Color(255, 255, 255));
         jButton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-50.png"))); // NOI18N
 
+        jButton82.setBackground(new java.awt.Color(255, 255, 255));
         jButton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-50.png"))); // NOI18N
         jButton82.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1419,6 +1513,7 @@ public class Main extends javax.swing.JFrame {
         jLabel109.setForeground(new java.awt.Color(51, 51, 255));
         jLabel109.setText("THÊM");
 
+        jButton83.setBackground(new java.awt.Color(255, 255, 255));
         jButton83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-input-excel-50.png"))); // NOI18N
         jButton83.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1467,7 +1562,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton82, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton83, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(783, Short.MAX_VALUE))
+                .addContainerGap(894, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1507,7 +1602,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pNhanVienLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1000, Short.MAX_VALUE))
+                .addContainerGap(1018, Short.MAX_VALUE))
         );
 
         panelContent.add(pNhanVien, "card9");
@@ -1524,14 +1619,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pThongKeLayout.createSequentialGroup()
                 .addGap(340, 340, 340)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(648, Short.MAX_VALUE))
+                .addContainerGap(759, Short.MAX_VALUE))
         );
         pThongKeLayout.setVerticalGroup(
             pThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pThongKeLayout.createSequentialGroup()
                 .addGap(245, 245, 245)
                 .addComponent(jLabel8)
-                .addContainerGap(831, Short.MAX_VALUE))
+                .addContainerGap(849, Short.MAX_VALUE))
         );
 
         panelContent.add(pThongKe, "card10");
@@ -1690,16 +1785,16 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pTrangChuLayout.createSequentialGroup()
                 .addGroup(pTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pTrangChuLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(153, 153, 153)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
+                        .addGap(44, 44, 44)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pTrangChuLayout.createSequentialGroup()
-                        .addGap(118, 118, 118)
+                        .addGap(262, 262, 262)
                         .addComponent(jLabel9)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         pTrangChuLayout.setVerticalGroup(
             pTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1711,10 +1806,97 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addContainerGap(508, Short.MAX_VALUE))
         );
 
         panelContent.add(pTrangChu, "card2");
+
+        pThuocTinh.setBackground(new java.awt.Color(255, 255, 255));
+        pThuocTinh.setName("ThuocTinh"); // NOI18N
+
+        jButtonHang.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/mau-logo-hang-dien-thoai(1) (1).jpg"))); // NOI18N
+        jButtonHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHangActionPerformed(evt);
+            }
+        });
+
+        jButtonLoai.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/chan-dung-may-tinh-bang-laptop-dien-thoai-up-xep-gon-va-dung-nhieu-goc-do_bengovn (1).jpg"))); // NOI18N
+        jButtonLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoaiActionPerformed(evt);
+            }
+        });
+
+        jLabelHang.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        jLabelHang.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelHang.setText("Hãng");
+
+        jLabelLoai.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        jLabelLoai.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelLoai.setText("CHƯƠNG TRÌNH KHUYẾN MÃI");
+
+        jButtonKhuyenMai.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/KHUYEN-MAI.png"))); // NOI18N
+
+        jLabelLoai1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        jLabelLoai1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelLoai1.setText(" Loại");
+
+        javax.swing.GroupLayout pThuocTinhLayout = new javax.swing.GroupLayout(pThuocTinh);
+        pThuocTinh.setLayout(pThuocTinhLayout);
+        pThuocTinhLayout.setHorizontalGroup(
+            pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pThuocTinhLayout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(jLabelHang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(jButtonKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(427, 427, 427))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pThuocTinhLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pThuocTinhLayout.createSequentialGroup()
+                        .addComponent(jButtonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123)
+                        .addComponent(jButtonLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(105, 105, 105))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pThuocTinhLayout.createSequentialGroup()
+                        .addComponent(jLabelLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(313, 313, 313))))
+            .addGroup(pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pThuocTinhLayout.createSequentialGroup()
+                    .addContainerGap(889, Short.MAX_VALUE)
+                    .addComponent(jLabelLoai1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(238, 238, 238)))
+        );
+        pThuocTinhLayout.setVerticalGroup(
+            pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pThuocTinhLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pThuocTinhLayout.createSequentialGroup()
+                        .addComponent(jLabelHang)
+                        .addGap(174, 174, 174))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pThuocTinhLayout.createSequentialGroup()
+                        .addComponent(jButtonKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabelLoai)
+                .addContainerGap(401, Short.MAX_VALUE))
+            .addGroup(pThuocTinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pThuocTinhLayout.createSequentialGroup()
+                    .addGap(489, 489, 489)
+                    .addComponent(jLabelLoai1)
+                    .addContainerGap(593, Short.MAX_VALUE)))
+        );
+
+        panelContent.add(pThuocTinh, "card10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1777,7 +1959,7 @@ public class Main extends javax.swing.JFrame {
        CardLayout layout = (CardLayout) panelContent.getLayout();
           layout.show(panelContent, "NhaCungCap");
     }//GEN-LAST:event_btnNhaCungCapActionPerformed
-    private void loadSanPhamToTable() {
+    public void loadSanPhamToTable() {
     DefaultTableModel model = (DefaultTableModel) JTableSanPham.getModel();
     model.setRowCount(0); // Clear the table
 
@@ -1826,17 +2008,55 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void jButtonThemSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemSanPhamActionPerformed
-         ThemSanPham themSP = new ThemSanPham(); // Tạo đối tượng frame ThemSanPham
+         ThemSanPham themSP = new ThemSanPham(this); // Tạo đối tượng frame ThemSanPham
          themSP.setVisible(true); // Hiển thị frame
     }//GEN-LAST:event_jButtonThemSanPhamActionPerformed
 
     private void jButtonSuaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaSanPhamActionPerformed
-       SuaSanPham suaSP = new SuaSanPham();
-       suaSP.setVisible(true);
+ int selectedRow = JTableSanPham.getSelectedRow();
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm để cập nhật!");
+    return;
+}
+
+int maSanPham = (int) JTableSanPham.getValueAt(selectedRow, 0);
+
+SuaSanPham suaSP = new SuaSanPham(maSanPham, this); // `this` là form chính
+suaSP.setVisible(true);
     }//GEN-LAST:event_jButtonSuaSanPhamActionPerformed
 
     private void jButtonXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaSanPhamActionPerformed
-        // TODO add your handling code here:
+    int selectedRow = JTableSanPham.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm để xóa!");
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    // Lấy mã sản phẩm từ dòng được chọn
+    int maSanPham = (int) JTableSanPham.getValueAt(selectedRow, 0);
+
+    // Xóa chi tiết sản phẩm trước
+    ChiTietSanPhamBUS ctspBUS = new ChiTietSanPhamBUS();
+    boolean deletedCTSP = ctspBUS.deleteByMaSanPham(maSanPham); // dùng BUS đúng chuẩn
+
+    // Xóa sản phẩm chính
+    SanPhamBUS sanPhamBUS = new SanPhamBUS();
+    SanPhamDTO sp = sanPhamBUS.getByMaSP(maSanPham);
+    boolean deletedSP = sanPhamBUS.delete(sp);
+
+    if (deletedCTSP && deletedSP) {
+        JOptionPane.showMessageDialog(this, "Xóa sản phẩm và chi tiết thành công!");
+        loadSanPhamToTable();
+    } else {
+        JOptionPane.showMessageDialog(this, "Xóa thất bại! Vui lòng kiểm tra lại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    
     }//GEN-LAST:event_jButtonXoaSanPhamActionPerformed
 
     private void jButtonXuatSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXuatSanPhamActionPerformed
@@ -1974,9 +2194,37 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton83ActionPerformed
 
     private void jButtonChiTietSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChiTietSanPhamActionPerformed
-        XemChiTietSanPham XemCTSP = new XemChiTietSanPham();
-        XemCTSP.setVisible(true);
+       int selectedRow = JTableSanPham.getSelectedRow();
+       if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm để xem chi tiết!");
+        return;
+    }
+
+    int maSP = (int) JTableSanPham.getValueAt(selectedRow, 0);
+
+    // Mở form xem chi tiết sản phẩm
+    XemChiTietSanPham chiTietForm = new XemChiTietSanPham(maSP);
+    chiTietForm.setVisible(true);
     }//GEN-LAST:event_jButtonChiTietSanPhamActionPerformed
+
+    private void btnThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuocTinhActionPerformed
+         CardLayout layout = (CardLayout) panelContent.getLayout();
+          layout.show(panelContent, "ThuocTinh");
+    }//GEN-LAST:event_btnThuocTinhActionPerformed
+
+    private void jButtonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHangActionPerformed
+         Hang hang = new Hang();
+         hang.setVisible(true); 
+    }//GEN-LAST:event_jButtonHangActionPerformed
+
+    private void jButtonLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoaiActionPerformed
+     Loai loai = new Loai();
+         loai.setVisible(true); 
+    }//GEN-LAST:event_jButtonLoaiActionPerformed
+
+    private void jButtonNhanSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhanSanPhamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNhanSanPhamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2028,6 +2276,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnPhieuNhap;
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JButton btnThuocTinh;
     private javax.swing.JButton jButton37;
     private javax.swing.JButton jButton38;
     private javax.swing.JButton jButton39;
@@ -2065,6 +2314,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton82;
     private javax.swing.JButton jButton83;
     private javax.swing.JButton jButtonChiTietSanPham;
+    private javax.swing.JButton jButtonHang;
+    private javax.swing.JButton jButtonKhuyenMai;
+    private javax.swing.JButton jButtonLoai;
+    private javax.swing.JButton jButtonNhanSanPham;
     private javax.swing.JButton jButtonSuaSanPham;
     private javax.swing.JButton jButtonThemSanPham;
     private javax.swing.JButton jButtonXoaSanPham;
@@ -2112,6 +2365,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
@@ -2127,6 +2381,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel96;
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabelHang;
+    private javax.swing.JLabel jLabelLoai;
+    private javax.swing.JLabel jLabelLoai1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -2156,6 +2413,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pPhieuXuat;
     private javax.swing.JPanel pSanPham;
     private javax.swing.JPanel pThongKe;
+    private javax.swing.JPanel pThuocTinh;
     private javax.swing.JPanel pTrangChu;
     private javax.swing.JPanel panelContent;
     private javax.swing.JPanel panelMenu;

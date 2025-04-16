@@ -33,14 +33,15 @@ public class SanPhamBUS {
     }
 
     // Lấy sản phẩm theo mã sản phẩm
-    public SanPhamDTO getByMaSP(int maSanPham) {
-        for (SanPhamDTO sp : this.listSP) {
-            if (sp.getMaSanPham() == maSanPham) {
-                return sp;
-            }
+  public SanPhamDTO getByMaSP(int maSP) {
+    for (SanPhamDTO sp : this.getAll()) {
+        if (sp.getMaSanPham() == maSP) {
+            return sp;
         }
-        return null;  // Trả về null nếu không tìm thấy sản phẩm
     }
+    return null;
+}
+
 
     // Lấy vị trí của sản phẩm trong list theo mã sản phẩm
     public int getIndexByMaSP(int maSanPham) {

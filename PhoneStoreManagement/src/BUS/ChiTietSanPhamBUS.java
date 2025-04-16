@@ -7,11 +7,30 @@ import java.util.HashMap;
 
 public class ChiTietSanPhamBUS {
 
-    private final ChiTietSanPhamDAO ctspDAO = new ChiTietSanPhamDAO();
+    public final ChiTietSanPhamDAO ctspDAO = new ChiTietSanPhamDAO();
     public ArrayList<ChiTietSanPhamDTO> listctsp = new ArrayList<>();
 
     public ChiTietSanPhamBUS() {
+        listctsp = ctspDAO.selectAll(); // load dữ liệu ngay khi khởi tạo
     }
+
+    public boolean deleteByMaSanPham(int maSanPham) {
+        return ctspDAO.delete(String.valueOf(maSanPham)) > 0;
+}
+    
+    // Thêm chi tiết sản phẩm
+    public boolean add(ChiTietSanPhamDTO ctsp) {
+        int result = ctspDAO.insert(ctsp);
+        if (result > 0) {
+            listctsp.add(ctsp); // cập nhật danh sách tạm
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean update(ChiTietSanPhamDTO ctsp) {
+    return ctspDAO.update(ctsp) > 0;
+}
 
     // Lấy tất cả chi tiết sản phẩm
     public ArrayList<ChiTietSanPhamDTO> getAll() {
@@ -33,12 +52,7 @@ public class ChiTietSanPhamBUS {
         ArrayList<ChiTietSanPhamDTO> chitietsp = ctspDAO.selectAllByMaPhieuNhap(maphieunhap);
         HashMap<Integer, ArrayList<ChiTietSanPhamDTO>> result = new HashMap<>();
         for (ChiTietSanPhamDTO i : chitietsp) {
-            if (result.get(i.getMaSanPham()) == null) {
-                result.put(i.getMaSanPham(), new ArrayList<>());
-            }
-        }
-        for (ChiTietSanPhamDTO i : chitietsp) {
-            result.get(i.getMaSanPham()).add(i);
+            result.computeIfAbsent(i.getMaSanPham(), k -> new ArrayList<>()).add(i);
         }
         return result;
     }
@@ -48,17 +62,12 @@ public class ChiTietSanPhamBUS {
         ArrayList<ChiTietSanPhamDTO> chitietsp = ctspDAO.selectAllByMaPhieuXuat(maphieuxuat);
         HashMap<Integer, ArrayList<ChiTietSanPhamDTO>> result = new HashMap<>();
         for (ChiTietSanPhamDTO i : chitietsp) {
-            if (result.get(i.getMaSanPham()) == null) {
-                result.put(i.getMaSanPham(), new ArrayList<>());
-            }
-        }
-        for (ChiTietSanPhamDTO i : chitietsp) {
-            result.get(i.getMaSanPham()).add(i);
+            result.computeIfAbsent(i.getMaSanPham(), k -> new ArrayList<>()).add(i);
         }
         return result;
     }
 
-    // Hiển thị thông tin chi tiết sản phẩm
+    // Hiển thị thông tin chi tiết sản phẩm (console debug)
     public void Show(ArrayList<ChiTietSanPhamDTO> x) {
         for (ChiTietSanPhamDTO a : x) {
             System.out.println("Mã sản phẩm: " + a.getMaSanPham() + ", Chip: " + a.getChip() +
@@ -68,19 +77,7 @@ public class ChiTietSanPhamBUS {
         }
     }
 
-    // Cập nhật thông tin chi tiết sản phẩm khi xuất hàng
-//    public void updateXuat(ArrayList<ChiTietSanPhamDTO> ct) {
-//        for (ChiTietSanPhamDTO chiTietSanPhamDTO : ct) {
-//            ctspDAO.updateXuat(chiTietSanPhamDTO);
-//        }
-//    }
-
-    // Lấy tất cả chi tiết sản phẩm từ mã phiếu xuất
-    public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuXuat(int maphieu) {
-        return ctspDAO.selectAllByMaPhieuXuat(maphieu);
-    }
-
-    // Bộ lọc theo chip, ram và các thông tin khác
+    // Lọc chi tiết sản phẩm theo chip, ram, rom
     public ArrayList<ChiTietSanPhamDTO> FilterAll(String text, int masp, String chip, String ram, String rom) {
         ArrayList<ChiTietSanPhamDTO> list = this.getAllCTSPbyMasp(masp);
         ArrayList<ChiTietSanPhamDTO> result = new ArrayList<>();
@@ -90,5 +87,10 @@ public class ChiTietSanPhamBUS {
             }
         }
         return result;
+    }
+
+    // Lấy chi tiết sản phẩm từ mã phiếu xuất
+    public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuXuat(int maphieu) {
+        return ctspDAO.selectAllByMaPhieuXuat(maphieu);
     }
 }
