@@ -93,6 +93,16 @@ public class Main extends javax.swing.JFrame {
         JTableSanPham.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14)); // Đổi font chữ
         JTableSanPham.getColumnModel().getColumn(0).setPreferredWidth(40); // Cột đầu tiên rộng 150px
         JTableSanPham.getColumnModel().getColumn(1).setPreferredWidth(100);
+        
+        JTablePhieuNhap.getTableHeader().setForeground(Color.BLACK);      // Đổi màu chữ
+        JTablePhieuNhap.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14)); // Đổi font chữ
+        JTablePhieuNhap.getColumnModel().getColumn(0).setPreferredWidth(40); // Cột đầu tiên rộng 150px
+        JTablePhieuNhap.getColumnModel().getColumn(1).setPreferredWidth(100);
+        
+        jTableHoaDon.getTableHeader().setForeground(Color.BLACK);      // Đổi màu chữ
+        jTableHoaDon.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14)); // Đổi font chữ
+        jTableHoaDon.getColumnModel().getColumn(0).setPreferredWidth(40); // Cột đầu tiên rộng 150px
+        jTableHoaDon.getColumnModel().getColumn(1).setPreferredWidth(100);
       
         jPanel7.add(dateChooser1);
         jPanel8.add(dateChooser2);
