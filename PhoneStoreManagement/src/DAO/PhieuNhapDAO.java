@@ -20,11 +20,11 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
             Connection con = JDBCUtil.getConnection();
             String sql = "INSERT INTO phieunhap (MaPhieuNhap, MaNhanVien, MaNhaCungCap, NgayNhap, TongTien) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaPhieuNhap());
-            pst.setInt(2, t.getMaNhanVien());
-            pst.setInt(3, t.getMaNhaCungCap());
+            pst.setString(1, t.getMaPhieuNhap());
+            pst.setString(2, t.getMaNhanVien());
+            pst.setString(3, t.getMaNhaCungCap());
             pst.setTimestamp(4, t.getNgayNhap());
-            pst.setLong(5, t.getTongTien());
+            pst.setDouble(5, t.getTongTien());
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -40,11 +40,11 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
             Connection con = JDBCUtil.getConnection();
             String sql = "UPDATE phieunhap SET MaNhanVien=?, MaNhaCungCap=?, NgayNhap=?, TongTien=? WHERE MaPhieuNhap=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaNhanVien());
-            pst.setInt(2, t.getMaNhaCungCap());
+            pst.setString(1, t.getMaNhanVien());
+            pst.setString(2, t.getMaNhaCungCap());
             pst.setTimestamp(3, t.getNgayNhap());
-            pst.setLong(4, t.getTongTien());
-            pst.setInt(5, t.getMaPhieuNhap());
+            pst.setDouble(4, t.getTongTien());
+            pst.setString(5, t.getMaPhieuNhap());
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -79,9 +79,9 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 PhieuNhapDTO pn = new PhieuNhapDTO(
-                    rs.getInt("MaPhieuNhap"),
-                    rs.getInt("MaNhanVien"),
-                    rs.getInt("MaNhaCungCap"),
+                    rs.getString("MaPhieuNhap"),
+                    rs.getString("MaNhanVien"),
+                    rs.getString("MaNhaCungCap"),
                     rs.getTimestamp("NgayNhap"),
                     rs.getLong("TongTien")
                 );
@@ -105,9 +105,9 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 result = new PhieuNhapDTO(
-                    rs.getInt("MaPhieuNhap"),
-                    rs.getInt("MaNhanVien"),
-                    rs.getInt("MaNhaCungCap"),
+                    rs.getString("MaPhieuNhap"),
+                    rs.getString("MaNhanVien"),
+                    rs.getString("MaNhaCungCap"),
                     rs.getTimestamp("NgayNhap"),
                     rs.getLong("TongTien")
                 );
@@ -136,4 +136,21 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
         }
         return result;
     }
+        public String getLastMaPhieuNhap() {
+        String lastId = null;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT MaPhieuNhap FROM PhieuNhap ORDER BY MaPhieuNhap DESC LIMIT 1";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                lastId = rs.getString("MaPhieuNhap");
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(PhieuNhapDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lastId;
+    }
+
 }

@@ -6,16 +6,16 @@ import java.sql.Timestamp;
  * DTO cho bảng Phiếu Nhập
  */
 public class PhieuNhapDTO {
-    private int MaPhieuNhap;
-    private int MaNhanVien;
-    private int MaNhaCungCap;
+    private String MaPhieuNhap;
+    private String MaNhanVien;
+    private String MaNhaCungCap;
     private Timestamp NgayNhap;
-    private long TongTien;
+    private double TongTien;
 
     public PhieuNhapDTO() {
     }
 
-    public PhieuNhapDTO(int MaPhieuNhap, int MaNhanVien, int MaNhaCungCap, Timestamp NgayNhap, long TongTien) {
+    public PhieuNhapDTO(String MaPhieuNhap, String MaNhanVien, String MaNhaCungCap, Timestamp NgayNhap, double TongTien) {
         this.MaPhieuNhap = MaPhieuNhap;
         this.MaNhanVien = MaNhanVien;
         this.MaNhaCungCap = MaNhaCungCap;
@@ -23,27 +23,27 @@ public class PhieuNhapDTO {
         this.TongTien = TongTien;
     }
 
-    public int getMaPhieuNhap() {
+    public String getMaPhieuNhap() {
         return MaPhieuNhap;
     }
 
-    public void setMaPhieuNhap(int maPhieuNhap) {
+    public void setMaPhieuNhap(String maPhieuNhap) {
         this.MaPhieuNhap = maPhieuNhap;
     }
 
-    public int getMaNhanVien() {
+    public String getMaNhanVien() {
         return MaNhanVien;
     }
 
-    public void setMaNhanVien(int maNhanVien) {
+    public void setMaNhanVien(String maNhanVien) {
         this.MaNhanVien = maNhanVien;
     }
 
-    public int getMaNhaCungCap() {
+    public String getMaNhaCungCap() {
         return MaNhaCungCap;
     }
 
-    public void setMaNhaCungCap(int maNhaCungCap) {
+    public void setMaNhaCungCap(String maNhaCungCap) {
         this.MaNhaCungCap = maNhaCungCap;
     }
 
@@ -55,11 +55,11 @@ public class PhieuNhapDTO {
         this.NgayNhap = ngayNhap;
     }
 
-    public long getTongTien() {
+    public double getTongTien() {
         return TongTien;
     }
 
-    public void setTongTien(long tongTien) {
+    public void setTongTien(double tongTien) {
         this.TongTien = tongTien;
     }
 

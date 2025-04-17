@@ -45,7 +45,8 @@ public class LoginForm extends javax.swing.JFrame {
         Right.setBackground(new java.awt.Color(255, 255, 255));
         Right.setMinimumSize(new java.awt.Dimension(400, 500));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\DoAnJava\\PhoneStoreManagement\\src\\icon\\logo.jpg")); // NOI18N
+        jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
         Right.setLayout(RightLayout);
@@ -70,6 +71,7 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel1.setText("Đăng Nhập");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\DoAnJava\\PhoneStoreManagement\\src\\icon\\icons8-user-30.png")); // NOI18N
         jLabel2.setText("User:");
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -80,6 +82,7 @@ public class LoginForm extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\DoAnJava\\PhoneStoreManagement\\src\\icon\\icons8-key-30.png")); // NOI18N
         jLabel3.setText("Password:");
 
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
