@@ -863,6 +863,7 @@ public class Main extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        JTablePhieuNhap.setRowHeight(40);
         jScrollPane4.setViewportView(JTablePhieuNhap);
         JTablePhieuNhap.setDefaultEditor(Object.class, null);
 
