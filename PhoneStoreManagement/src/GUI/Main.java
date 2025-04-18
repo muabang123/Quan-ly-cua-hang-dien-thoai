@@ -213,6 +213,7 @@ public class Main extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextFieldTimKiem = new javax.swing.JTextField();
         Buttonrefesh6 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         JTablePhieuNhap = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
@@ -249,6 +250,7 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldTimKiem2 = new javax.swing.JTextField();
         Buttonrefesh7 = new javax.swing.JButton();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableHoaDon = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
@@ -796,12 +798,25 @@ public class Main extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Tìm Kiếm:");
 
+        jTextFieldTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTimKiemActionPerformed(evt);
+            }
+        });
+
         Buttonrefesh6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Buttonrefesh6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-30.png"))); // NOI18N
         Buttonrefesh6.setText("  Làm mới");
         Buttonrefesh6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Buttonrefesh6ActionPerformed(evt);
+            }
+        });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Theo Mã Phiếu", "Theo Mã Nhân Viên", "Theo Mã Nhà Cung Cấp" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
             }
         });
 
@@ -835,7 +850,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 565, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -857,7 +874,8 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)
-                        .addComponent(Buttonrefesh6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Buttonrefesh6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -960,7 +978,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1218,6 +1236,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Theo Mã Hóa Đơn", "Theo Mã Nhân Viên", "Theo Mã Khách Hàng" }));
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1249,6 +1269,8 @@ public class Main extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldTimKiem2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1261,6 +1283,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextFieldTimKiem2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Buttonrefesh7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton61)
@@ -1268,14 +1298,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButton56, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton58, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextFieldTimKiem2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Buttonrefesh7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel85)
@@ -2172,7 +2195,7 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(panelContent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(panelContent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -2190,51 +2213,91 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHoaDonActionPerformed
       private void searchAndUpdateTable() {
         // Get the text from the search field
-        String searchText = jTextFieldTimKiem.getText().trim().toLowerCase();
-        
-        // If the search text is empty, reset the table with all data
-        if (searchText.isEmpty()) {
-            updateTable(phieuNhapBUS.getAllList());
-            return;
-        }
+    String searchText = jTextFieldTimKiem.getText().trim().toLowerCase();
+    String selectedSearchOption = (String) jComboBox2.getSelectedItem();
+    if (searchText.isEmpty()) {
+        updateTable(phieuNhapBUS.getAllList());
+        return;
+    }
+    ArrayList<PhieuNhapDTO> filteredList = new ArrayList<>();
 
-        // Filter the list based on the search text
-        ArrayList<PhieuNhapDTO> filteredList = new ArrayList<>();
-        for (PhieuNhapDTO phieu : phieuNhapBUS.getAllList()) {
-            // Check if the MaPhieuNhap or MaNhanVien or MaNhaCungCap contains the search text
-            if (phieu.getMaPhieuNhap().toLowerCase().contains(searchText) || 
-                phieu.getMaNhanVien().toLowerCase().contains(searchText) ||
-                phieu.getMaNhaCungCap().toLowerCase().contains(searchText)) {
-                filteredList.add(phieu);
-            }
+    for (PhieuNhapDTO phieu : phieuNhapBUS.getAllList()) {
+        boolean matches = false;
+        switch (selectedSearchOption) {
+            case "Theo Mã Phiếu":
+                if (phieu.getMaPhieuNhap().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
+            case "Theo Mã Nhân Viên":
+                if (phieu.getMaNhanVien().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
+            case "Theo Mã Nhà Cung Cấp":
+                if (phieu.getMaNhaCungCap().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
+            case "Tất cả":
+                if (phieu.getMaPhieuNhap().toLowerCase().contains(searchText) || 
+                    phieu.getMaNhanVien().toLowerCase().contains(searchText) ||
+                    phieu.getMaNhaCungCap().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
         }
-
-        // Update the JTable with the filtered list
-        updateTable(filteredList);
+        if (matches) {
+            filteredList.add(phieu);
+        }
+    }
+    updateTable(filteredList);
     }
       private void searchAndUpdateTable2 () {
-        // Get the text from the search field
-        String searchText = jTextFieldTimKiem2.getText().trim().toLowerCase();
+    String searchText = jTextFieldTimKiem2.getText().trim().toLowerCase();
+    String selectedSearchOption = (String) jComboBox3.getSelectedItem();
+    if (searchText.isEmpty()) {
+        updateTable2(hoadonBUS.getAllList());
+        return;
+    }
+    ArrayList<HoaDonDTO> filteredList = new ArrayList<>();
+
+    for (HoaDonDTO hoaDon : hoadonBUS.getAllList()) {
+        boolean matches = false;
         
-        // If the search text is empty, reset the table with all data
-        if (searchText.isEmpty()) {
-            updateTable2(hoadonBUS.getAllList());
-            return;
+        switch (selectedSearchOption) {
+            case "Theo Mã Hóa Đơn":
+                if (hoaDon.getMaHoaDon().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
+            case "Theo Mã Nhân Viên":
+                if (hoaDon.getMaNhanVien().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
+            case "Theo Mã Khách Hàng":
+                if (hoaDon.getMaKhachHang().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
+            case "Tất Cả":
+                if (hoaDon.getMaHoaDon().toLowerCase().contains(searchText) || 
+                    hoaDon.getMaNhanVien().toLowerCase().contains(searchText) ||
+                    hoaDon.getMaKhachHang().toLowerCase().contains(searchText)) {
+                    matches = true;
+                }
+                break;
         }
 
-        // Filter the list based on the search text
-        ArrayList<HoaDonDTO> filteredList = new ArrayList<>();
-        for (HoaDonDTO phieu : hoadonBUS.getAllList()) {
-            // Check if the MaPhieuNhap or MaNhanVien or MaNhaCungCap contains the search text
-            if (phieu.getMaHoaDon().toLowerCase().contains(searchText) || 
-                phieu.getMaNhanVien().toLowerCase().contains(searchText) ||
-                phieu.getMaKhachHang().toLowerCase().contains(searchText)) {
-                filteredList.add(phieu);
-            }
+        // If the search condition matches, add the item to the filtered list
+        if (matches) {
+            filteredList.add(hoaDon);
         }
+    }
 
-        // Update the JTable with the filtered list
-        updateTable2(filteredList);
+    // Update the JTable with the filtered list
+    updateTable2(filteredList);
     }
 
     // Method to update the JTable with the filtered data
@@ -2745,6 +2808,14 @@ suaSP.setVisible(true);
         Loai loai = new Loai();
         loai.setVisible(true);
     }//GEN-LAST:event_jButtonLoaiActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jTextFieldTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTimKiemActionPerformed
     private void updateTableWithDateRange(Date startDate, Date endDate) {
     DefaultTableModel model = (DefaultTableModel) JTablePhieuNhap.getModel();
     model.setRowCount(0);
@@ -2925,6 +2996,8 @@ suaSP.setVisible(true);
     private javax.swing.JButton jButtonXoaSanPham;
     private javax.swing.JButton jButtonXuatSanPham;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
