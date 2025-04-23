@@ -125,6 +125,27 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
         }
         return result;
     }
+    
+   // Kiểm tra mã sản phẩm có tồn tại trong cơ sở dữ liệu hay không
+    public boolean isMaSanPhamExist(int maSanPham) {
+        boolean exists = false;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT COUNT(*) FROM sanpham WHERE MaSanPham = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, maSanPham);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                exists = true; // Mã sản phẩm tồn tại
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exists;
+    }
+
+    
 
     @Override
     public int getAutoIncrement() {

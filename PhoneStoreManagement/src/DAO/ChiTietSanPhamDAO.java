@@ -14,66 +14,102 @@ public class ChiTietSanPhamDAO implements DAOinterface<ChiTietSanPhamDTO> {
     }
 
     @Override
-    public int insert(ChiTietSanPhamDTO t) {
-        int result = 0;
-        try {
-            Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO chitietsanpham (MaSanPham, MaHang, Chip, Ram, Rom, Inch, DungLuongPin, MauSac) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaSanPham());
-            pst.setInt(2, t.getMaHang());
-            pst.setString(3, t.getChip());
-            pst.setString(4, t.getRam());
-            pst.setString(5, t.getRom());
-            pst.setString(6, t.getInch());
-            pst.setString(7, t.getDungLuongPin());
-            pst.setString(8, t.getMauSac());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+public int insert(ChiTietSanPhamDTO t) {
+    int result = 0;
+    try {
+        Connection con = JDBCUtil.getConnection();
+        // Đảm bảo các cột khóa chính tổng hợp
+        String sql = "INSERT INTO chitietsanpham (MaSanPham, MaHang, Chip, Ram, Rom, Inch, DungLuongPin, MauSac) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, t.getMaSanPham());
+        pst.setInt(2, t.getMaHang());
+        pst.setString(3, t.getChip());
+        pst.setString(4, t.getRam());
+        pst.setString(5, t.getRom());
+        pst.setString(6, t.getInch());
+        pst.setString(7, t.getDungLuongPin());
+        pst.setString(8, t.getMauSac());
+        result = pst.executeUpdate();
+        JDBCUtil.closeConnection(con);
+    } catch (SQLException ex) {
+        Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return result;
+}
 
-    @Override
-    public int update(ChiTietSanPhamDTO t) {
-        int result = 0;
-        try {
-            Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE chitietsanpham SET MaHang=?, Chip=?, Ram=?, Rom=?, Inch=?, DungLuongPin=?, MauSac=? WHERE MaSanPham=?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaHang());
-            pst.setString(2, t.getChip());
-            pst.setString(3, t.getRam());
-            pst.setString(4, t.getRom());
-            pst.setString(5, t.getInch());
-            pst.setString(6, t.getDungLuongPin());
-            pst.setString(7, t.getMauSac());
-            pst.setInt(8, t.getMaSanPham());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
+@Override
+  public int update(ChiTietSanPhamDTO t) {
+    return 0;
+}
 
-    @Override
-    public int delete(String t) {
-        int result = 0;
-        try {
-            Connection con = JDBCUtil.getConnection();
-            String sql = "DELETE FROM chitietsanpham WHERE MaSanPham = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t);
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+
+   @Override
+public int delete(String t) {
+    // Lỗi: Không phải kiểu xóa theo 1 đối tượng mà là xóa theo 4 khóa chính
+    throw new UnsupportedOperationException("Use deleteByCompositeKey instead.");
+}
+
+public int delete(int maSanPham) {
+    int result = 0;
+    try {
+        Connection con = JDBCUtil.getConnection();
+        String sql = "DELETE FROM sanpham WHERE MaSanPham=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, maSanPham);  // Truyền mã sản phẩm cần xóa
+        result = pst.executeUpdate(); // Thực hiện xóa
+        JDBCUtil.closeConnection(con); // Đóng kết nối
+    } catch (SQLException ex) {
+        Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return result;
+}
+
+// Xóa theo khóa chính tổng hợp
+public int deleteByCompositeKey(int maSanPham, String ram, String rom, String mauSac) {
+    int result = 0;
+    try {
+        Connection con = JDBCUtil.getConnection();
+        String sql = "DELETE FROM chitietsanpham WHERE MaSanPham = ? AND Ram = ? AND Rom = ? AND MauSac = ?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, maSanPham);
+        pst.setString(2, ram);
+        pst.setString(3, rom);
+        pst.setString(4, mauSac);
+        result = pst.executeUpdate();
+        JDBCUtil.closeConnection(con);
+    } catch (SQLException ex) {
+        Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return result;  // Trả về số bản ghi bị xóa
+}
+
+public int deleteByMaSanPham(int maSanPham) {
+    int result = 0;
+    try {
+        // Kết nối với cơ sở dữ liệu
+        Connection con = JDBCUtil.getConnection();
+        
+        // Câu lệnh SQL để xóa chi tiết sản phẩm theo MaSanPham
+        String sql = "DELETE FROM chitietsanpham WHERE MaSanPham = ?";
+        
+        // Chuẩn bị câu lệnh
+        PreparedStatement pst = con.prepareStatement(sql);
+        
+        // Đặt giá trị cho tham số trong câu lệnh SQL
+        pst.setInt(1, maSanPham);
+        
+        // Thực thi câu lệnh xóa
+        result = pst.executeUpdate();
+        
+        // Đóng kết nối
+        JDBCUtil.closeConnection(con);
+    } catch (SQLException ex) {
+        // Xử lý ngoại lệ nếu có lỗi xảy ra
+        Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return result; // Trả về số dòng bị ảnh hưởng
+}
+
 
     @Override
     public ArrayList<ChiTietSanPhamDTO> selectAll() {
@@ -157,20 +193,7 @@ public class ChiTietSanPhamDAO implements DAOinterface<ChiTietSanPhamDTO> {
 
     @Override
     public int getAutoIncrement() {
-        int result = -1;
-        try {
-            Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND TABLE_NAME = 'chitietsanpham'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                result = rs.getInt("AUTO_INCREMENT");
-            }
-            JDBCUtil.closeConnection(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(ChiTietSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return -1;
     }
     public ArrayList<ChiTietSanPhamDTO> selectAllByMaSanPham(int masp) {
         ArrayList<ChiTietSanPhamDTO> result = new ArrayList<>();
@@ -267,20 +290,21 @@ public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuXuat(int maphieuxuat) {
     
     return result;
 }
-    public ChiTietSanPhamDTO selectByRamRomMauSac(int maSanPham, String ram, String rom, String mauSac) {
+   public ChiTietSanPhamDTO selectByRamRomMauSac(int maSanPham, String ram, String rom, String mauSac) {
     ChiTietSanPhamDTO result = null;
     try {
         Connection con = JDBCUtil.getConnection();
-        // Tìm kiếm dựa trên Ram, Rom và MauSac
-        String sql = "SELECT * FROM chitietsanpham WHERE Ram = ? AND Rom = ? AND MauSac = ?";
+        // Tìm kiếm dựa trên MaSanPham, Ram, Rom, MauSac (theo khóa chính tổng hợp)
+        String sql = "SELECT * FROM chitietsanpham WHERE MaSanPham = ? AND Ram = ? AND Rom = ? AND MauSac = ?";
         PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, ram);   // Tìm theo ram
-        pst.setString(2, rom);   // Tìm theo rom
-        pst.setString(3, mauSac); // Tìm theo mauSac
+        pst.setInt(1, maSanPham);   // Tìm theo MaSanPham
+        pst.setString(2, ram);      // Tìm theo Ram
+        pst.setString(3, rom);      // Tìm theo Rom
+        pst.setString(4, mauSac);   // Tìm theo MauSac
 
         ResultSet rs = pst.executeQuery();
         if (rs.next()) {
-            int maSanPhamInt = rs.getInt("MaSanPham");  // Lấy MaSanPham của bản ghi thỏa mãn điều kiện
+            int maSanPhamInt = rs.getInt("MaSanPham");
             String ramStr = rs.getString("Ram");
             String romStr = rs.getString("Rom");
             String mauSacStr = rs.getString("MauSac");
@@ -292,6 +316,7 @@ public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuXuat(int maphieuxuat) {
     }
     return result;
 }
+
 
 
 

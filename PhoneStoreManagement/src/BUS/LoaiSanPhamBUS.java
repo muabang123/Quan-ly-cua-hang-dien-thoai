@@ -42,6 +42,10 @@ public class LoaiSanPhamBUS {
     public boolean isTenLoaiExist(String tenLoai) {
         return loaiSanPhamDAO.isTenLoaiExist(tenLoai);  // Gọi phương thức kiểm tra tên loại trong DAO
     }
+    
+    public boolean isMaLoaiExist(int maLoai) {
+        return loaiSanPhamDAO.selectById(maLoai) != null; // Kiểm tra mã loại có tồn tại trong CSDL
+    }
 
     // Cập nhật loại sản phẩm
     public boolean update(LoaiSanPhamDTO loaiSanPham) {
