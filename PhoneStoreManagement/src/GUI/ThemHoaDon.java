@@ -21,12 +21,15 @@ import DAO.SanPhamDAO;
 import DAO.ChiTietSanPhamDAO;
 import DTO.ChiTietPhieuNhapDTO;
 import BUS.ChiTietSanPhamBUS;
+import BUS.KhachHangBUS;
 import DAO.ChiTietHoaDonDAO;
 import DTO.ChiTietSanPhamDTO;
 import DAO.ChiTietSanPhamDAO;
 import DAO.HoaDonDAO;
 import DTO.ChiTietHoaDonDTO;
 import DTO.HoaDonDTO;
+import DTO.KhachHangDTO;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -84,9 +87,10 @@ public class ThemHoaDon extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jComboBox5 = new javax.swing.JComboBox<>();
-        jTextField7 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -251,30 +255,38 @@ public class ThemHoaDon extends javax.swing.JFrame {
         jTextField11.setBackground(new java.awt.Color(204, 255, 255));
         jTextField11.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
 
+        jTextField7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton6.setText("...");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 32, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(102, 146, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,9 +294,13 @@ public class ThemHoaDon extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField7)
                                     .addComponent(jTextField6)
-                                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -301,7 +317,9 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -874,6 +892,53 @@ private boolean isErrorShown = false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+    JDialog dialog = new JDialog((JFrame) null, "Tìm Khách Hàng", true);
+    dialog.setSize(500, 350);
+    dialog.setLocationRelativeTo(null);
+
+    JTextField txtTimKiem = new JTextField(25);
+    DefaultListModel<String> model = new DefaultListModel<>();
+    JList<String> listKetQua = new JList<>(model);
+    KhachHangBUS bus = new KhachHangBUS();
+    ArrayList<KhachHangDTO> danhSach = bus.getDanhSachKhachHang();
+    Runnable filter = () -> {
+        String keyword = txtTimKiem.getText().trim().toLowerCase();
+        model.clear();
+        for (KhachHangDTO kh : danhSach) {
+            String display = kh.toString();
+            if (String.valueOf(kh.getMaKhachHang()).contains(keyword) ||
+                kh.getHoTenKhachHang().toLowerCase().contains(keyword)) {
+                model.addElement(display);
+            }
+        }
+    };
+    filter.run();
+    txtTimKiem.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e) { filter.run(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e) { filter.run(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { filter.run(); }
+    });
+    listKetQua.addListSelectionListener(e -> {
+        if (!e.getValueIsAdjusting() && listKetQua.getSelectedValue() != null) {
+            String selected = listKetQua.getSelectedValue();
+            String[] parts = selected.split(" - ");
+            if (parts.length > 0) {
+                jTextField7.setText(parts[0].trim());
+            }
+            dialog.dispose();
+        }
+    });
+    JPanel panelTop = new JPanel();
+    panelTop.add(new JLabel("Tìm kiếm:"));
+    panelTop.add(txtTimKiem);
+    dialog.setLayout(new BorderLayout());
+    dialog.add(panelTop, BorderLayout.NORTH);
+    dialog.add(new JScrollPane(listKetQua), BorderLayout.CENTER);
+    dialog.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
     
     private void loadProductTable() {
     SanPhamBUS sanPhamBUS = new SanPhamBUS();
@@ -1008,6 +1073,7 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

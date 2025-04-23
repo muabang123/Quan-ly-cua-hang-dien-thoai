@@ -260,21 +260,21 @@ public class XemChiTietNhap extends javax.swing.JFrame {
         table.addCell(new Phrase("STT", timesNewRomanFont));
         table.addCell(new Phrase("Mã SP", timesNewRomanFont));
         table.addCell(new Phrase("Tên SP", timesNewRomanFont));
+        table.addCell(new Phrase("Số lượng", timesNewRomanFont));
         table.addCell(new Phrase("RAM", timesNewRomanFont));
         table.addCell(new Phrase("ROM", timesNewRomanFont));
         table.addCell(new Phrase("Màu sắc", timesNewRomanFont));
         table.addCell(new Phrase("Đơn giá", timesNewRomanFont));
-        table.addCell(new Phrase("Số lượng", timesNewRomanFont));
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
             table.addCell(new Phrase(String.valueOf(i + 1), timesNewRomanFont)); // STT
             table.addCell(new Phrase(model.getValueAt(i, 1).toString(), timesNewRomanFont)); // Mã SP
             table.addCell(new Phrase(model.getValueAt(i, 2).toString(), timesNewRomanFont)); // Tên SP
-            table.addCell(new Phrase(model.getValueAt(i, 3).toString(), timesNewRomanFont)); // RAM
-            table.addCell(new Phrase(model.getValueAt(i, 4).toString(), timesNewRomanFont)); // ROM
-            table.addCell(new Phrase(model.getValueAt(i, 5).toString(), timesNewRomanFont)); // Màu sắc
-            table.addCell(new Phrase(model.getValueAt(i, 6).toString(), timesNewRomanFont)); // Đơn giá
-            table.addCell(new Phrase(model.getValueAt(i, 7).toString(), timesNewRomanFont)); // Số lượng
+            table.addCell(new Phrase(model.getValueAt(i, 3).toString(), timesNewRomanFont)); // Số lượng
+            table.addCell(new Phrase(model.getValueAt(i, 4).toString(), timesNewRomanFont)); // RAM
+            table.addCell(new Phrase(model.getValueAt(i, 5).toString(), timesNewRomanFont)); // ROM
+            table.addCell(new Phrase(model.getValueAt(i, 6).toString(), timesNewRomanFont)); // Màu sắc
+            table.addCell(new Phrase(model.getValueAt(i, 7).toString(), timesNewRomanFont)); // Đơn giá
         }
 
         document.add(table);

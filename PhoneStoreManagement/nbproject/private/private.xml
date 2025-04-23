@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/GUI/ThemPhieuNhap.java</file>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/DTO/ChiTietHoaDonDTO.java</file>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/DTO/ChiTietPhieuNhapDTO.java</file>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/DAO/ChiTietPhieuNhapDAO.java</file>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/GUI/XemChiTietHoaDon.java</file>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/GUI/XemChiTietNhap.java</file>
-            <file>file:/D:/Quan-ly-cua-hang-dien-thoai/PhoneStoreManagement/src/GUI/ThemHoaDon.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/GUI/ThemPhieuNhap.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/BUS/NhaCungCapBUS.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/GUI/ThemHoaDon.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/GUI/XemChiTietNhap.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/config/JDBCUtil.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/DAO/NhaCungCapDAO.java</file>
+            <file>file:/D:/doan1/PhoneStoreManagement/src/DTO/NhaCungCapDTO.java</file>
         </group>
     </open-files>
 </project-private>
