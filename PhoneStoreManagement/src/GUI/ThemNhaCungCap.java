@@ -10,6 +10,7 @@ import BUS.NhaCungCapBUS;
 import BUS.SanPhamBUS;
 import DTO.ChiTietSanPhamDTO;
 import DTO.*;
+import config.*;
 import DTO.SanPhamDTO;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -115,7 +116,7 @@ public class ThemNhaCungCap extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Họ tên");
+        jLabel5.setText("Tên");
 
         jLabel4.setText("Số điện thoại");
 
@@ -221,46 +222,57 @@ public class ThemNhaCungCap extends javax.swing.JFrame {
           this.dispose();
     }//GEN-LAST:event_jButtonExitActionPerformed
 
+    
+
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
- try {
-    // Kiểm tra dữ liệu nhập vào
-    if (txtMa.getText().isEmpty() ||
-        txtTen.getText().isEmpty() ||
-        txtDiaChi.getText().isEmpty() ||
-        txtSDT.getText().isEmpty() ||
-        txtEmail.getText().isEmpty()) {
 
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
-        return;
-    }
+    try {
+        // Kiểm tra dữ liệu rỗng
+        if (txtMa.getText().isEmpty() ||
+            txtTen.getText().isEmpty() ||
+            txtDiaChi.getText().isEmpty() ||
+            txtSDT.getText().isEmpty() ||
+            txtEmail.getText().isEmpty()) {
 
-    // Lấy dữ liệu từ các ô nhập
-    int maKH = Integer.parseInt(txtMa.getText().trim());
-    String hoTen = txtTen.getText().trim();
-    String diaChi = txtDiaChi.getText().trim();
-    String sdt = txtSDT.getText().trim();
-    String email = txtEmail.getText().trim();
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
+            return;
+        }
 
-    // Tạo DTO khách hàng
-     NhaCungCapDTO kh = new NhaCungCapDTO(maKH, hoTen, diaChi, sdt, email);
-
-    // Thêm khách hàng vào BUS
-     NhaCungCapBUS khBUS = new NhaCungCapBUS();
-    boolean result = khBUS.themNhaCungCap(kh);
-
-    // Kết quả
-    if (result) {
-        JOptionPane.showMessageDialog(this, "Thêm thành công!");
-        clearFields(); // Xóa form sau khi thêm
-        mainForm.loadKhachHangToTable();// Load lại bảng khách hàng
-    } else {
-        JOptionPane.showMessageDialog(this, "Thêm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
-
-} catch (Exception ex) {
-    ex.printStackTrace();
-    JOptionPane.showMessageDialog(this, "Lỗi: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (!CheckUtil.isValidPhoneNumber(txtSDT.getText().trim())) {
+    JOptionPane.showMessageDialog(this, "Số điện thoại phải có đúng 10 chữ số!");
+    return;
 }
+
+if (!CheckUtil.isValidEmail(txtEmail.getText().trim())) {
+    JOptionPane.showMessageDialog(this, "Email không đúng định dạng!");
+    return;
+}
+
+        // Lấy dữ liệu từ các ô nhập
+        int maKH = Integer.parseInt(txtMa.getText().trim());
+        String hoTen = txtTen.getText().trim();
+        String diaChi = txtDiaChi.getText().trim();
+
+        // Tạo DTO khách hàng
+        NhaCungCapDTO kh = new NhaCungCapDTO(maKH, hoTen, diaChi, txtSDT.getText().trim(), txtEmail.getText().trim());
+
+        // Thêm khách hàng vào BUS
+        NhaCungCapBUS khBUS = new NhaCungCapBUS();
+        boolean result = khBUS.themNhaCungCap(kh);
+
+        // Kết quả
+        if (result) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            clearFields(); // Xóa form sau khi thêm
+            mainForm.loadNhaCungCapToTable();// Load lại bảng khách hàng
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Lỗi: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
 
 
     }//GEN-LAST:event_btnThemActionPerformed

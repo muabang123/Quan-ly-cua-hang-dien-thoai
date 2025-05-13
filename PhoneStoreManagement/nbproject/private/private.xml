@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/GUI/ThemPhieuNhap.java</file>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/BUS/NhaCungCapBUS.java</file>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/GUI/ThemHoaDon.java</file>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/GUI/XemChiTietNhap.java</file>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/config/JDBCUtil.java</file>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/DAO/NhaCungCapDAO.java</file>
-            <file>file:/D:/doan1/PhoneStoreManagement/src/DTO/NhaCungCapDTO.java</file>
+            <file>file:/D:/PhoneStoreManagement/PhoneStoreManagement%20(2)/src/DAO/ThongKeDAO1.java</file>
+            <file>file:/D:/PhoneStoreManagement/PhoneStoreManagement%20(2)/src/DAO/HoaDonDAO.java</file>
+            <file>file:/D:/PhoneStoreManagement/PhoneStoreManagement%20(2)/src/DAO/ChiTietHoaDonDAO.java</file>
         </group>
     </open-files>
 </project-private>

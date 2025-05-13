@@ -69,6 +69,8 @@ public class KhachHangDAO implements DAOinterface<KhachHangDTO> {
         }
         return result;
     }
+    
+    
 
     @Override
     public ArrayList<KhachHangDTO> selectAll() {
@@ -123,7 +125,7 @@ public class KhachHangDAO implements DAOinterface<KhachHangDTO> {
         int result = -1;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlybanhang' AND TABLE_NAME = 'KhachHang'";
+            String sql = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlibanhang' AND TABLE_NAME = 'KhachHang'";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -135,4 +137,24 @@ public class KhachHangDAO implements DAOinterface<KhachHangDTO> {
         }
         return result;
     }
+     public ArrayList<KhachHangDTO> getDanhSachKhachHang() {
+        ArrayList<KhachHangDTO> ds = new ArrayList<>();
+        try (Connection conn = JDBCUtil.getConnection()) {
+            String sql = "SELECT MaKhachHang, HoTenKhachHang FROM khachhang";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                KhachHangDTO kh = new KhachHangDTO(0, "", "", "", ""); // dùng constructor mặc định
+                kh.setMaKhachHang(rs.getInt("MaKhachHang"));
+                kh.setHoTenKhachHang(rs.getString("HoTenKhachHang"));
+                ds.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ds;
+    }
+
+
 }

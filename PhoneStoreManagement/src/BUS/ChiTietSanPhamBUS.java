@@ -7,17 +7,13 @@ import java.util.HashMap;
 
 public class ChiTietSanPhamBUS {
 
-    public final ChiTietSanPhamDAO ctspDAO = new ChiTietSanPhamDAO();
+    public final ChiTietSanPhamDAO ctspDAO = ChiTietSanPhamDAO.getInstance();  // Khởi tạo singleton DAO
     public ArrayList<ChiTietSanPhamDTO> listctsp = new ArrayList<>();
 
     public ChiTietSanPhamBUS() {
-        listctsp = ctspDAO.selectAll(); // load dữ liệu ngay khi khởi tạo
+        listctsp = ctspDAO.selectAll(); // Load dữ liệu ngay khi khởi tạo
     }
 
-    public boolean deleteByMaSanPham(int maSanPham) {
-        return ctspDAO.delete(String.valueOf(maSanPham)) > 0;
-}
-    
     // Thêm chi tiết sản phẩm
     public boolean add(ChiTietSanPhamDTO ctsp) {
         int result = ctspDAO.insert(ctsp);
@@ -28,8 +24,19 @@ public class ChiTietSanPhamBUS {
         return false;
     }
     
-    public boolean update(ChiTietSanPhamDTO ctsp) {
-    return ctspDAO.update(ctsp) > 0;
+ 
+   public boolean deleteByMaSanPham(int maSanPham) {
+    ChiTietSanPhamDAO ctspDAO = new ChiTietSanPhamDAO();
+    
+    // Xóa chi tiết sản phẩm theo mã sản phẩm
+    int result = ctspDAO.deleteByMaSanPham(maSanPham);
+    return result > 0;
+}
+    
+   public boolean deleteByCompositeKey(int maSanPham, String ram, String rom, String mauSac) {
+    // Gọi DAO để xóa chi tiết sản phẩm
+    int result = ctspDAO.deleteByCompositeKey(maSanPham, ram, rom, mauSac);
+    return result > 0;  // Nếu xóa thành công, trả về true
 }
 
     // Lấy tất cả chi tiết sản phẩm
@@ -92,5 +99,22 @@ public class ChiTietSanPhamBUS {
     // Lấy chi tiết sản phẩm từ mã phiếu xuất
     public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuXuat(int maphieu) {
         return ctspDAO.selectAllByMaPhieuXuat(maphieu);
+    }
+
+    // Lấy chi tiết sản phẩm từ mã phiếu nhập
+    public ArrayList<ChiTietSanPhamDTO> selectAllByMaPhieuNhap(int maphieunhap) {
+        return ctspDAO.selectAllByMaPhieuNhap(maphieunhap);
+    }
+
+    // Lọc chi tiết sản phẩm theo chip, ram, rom
+    public ArrayList<ChiTietSanPhamDTO> FilterByChipRamRom(String chip, String ram, String rom) {
+        ArrayList<ChiTietSanPhamDTO> list = this.getAll();
+        ArrayList<ChiTietSanPhamDTO> result = new ArrayList<>();
+        for (ChiTietSanPhamDTO ctsp : list) {
+            if (ctsp.getChip().equalsIgnoreCase(chip) && ctsp.getRam().equalsIgnoreCase(ram) && ctsp.getRom().equalsIgnoreCase(rom)) {
+                result.add(ctsp);
+            }
+        }
+        return result;
     }
 }

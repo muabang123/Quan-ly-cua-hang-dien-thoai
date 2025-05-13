@@ -4,7 +4,16 @@
  */
 package GUI;
 
+import BUS.HangBUS;
+import BUS.LoaiSanPhamBUS;
+import DTO.HangDTO;
+import DTO.LoaiSanPhamDTO;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,7 +30,57 @@ public class Loai extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); // Hiển thị ở giữa màn hình
         this.setResizable(false); // Ngăn người dùng thay đổi kích thước cửa sổ
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loadLoaiSanPhamToTable();
+        
+        // Thêm một lắng nghe sự kiện chọn dòng
+jTableLoaiSanPham.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        // Kiểm tra xem người dùng đã chọn một dòng hay chưa
+        if (!e.getValueIsAdjusting()) {
+            int selectedRow = jTableLoaiSanPham.getSelectedRow();
+            if (selectedRow != -1) {
+                // Lấy mã loại sản phẩm từ dòng được chọn
+                int maLoai = (int) jTableLoaiSanPham.getValueAt(selectedRow, 0);
+                
+                // Lấy tên loại từ dòng được chọn và đổ vào các ô nhập liệu
+                String tenLoai = (String) jTableLoaiSanPham.getValueAt(selectedRow, 1);
+
+                // Đổ dữ liệu vào các ô nhập liệu
+                txtTenLoai.setText(tenLoai);  // Đổ tên loại vào ô nhập liệu
+                // Bạn có thể thêm mã loại nếu cần
+            }
+        }
     }
+});
+    }
+
+    
+private void loadLoaiSanPhamToTable() {
+    // Tạo đối tượng DefaultTableModel
+    DefaultTableModel model = (DefaultTableModel) jTableLoaiSanPham.getModel();
+    model.setRowCount(0);  // Xóa toàn bộ dữ liệu trong bảng
+
+    // Lấy danh sách loại sản phẩm từ BUS hoặc DAO
+    LoaiSanPhamBUS loaiSanPhamBUS = new LoaiSanPhamBUS();
+    ArrayList<LoaiSanPhamDTO> list = loaiSanPhamBUS.getAll();  // Giả sử getAll() trả về tất cả loại sản phẩm từ CSDL
+
+    // Duyệt qua danh sách và thêm từng dòng vào JTable
+    for (LoaiSanPhamDTO loaiSanPham : list) {
+        model.addRow(new Object[]{
+            loaiSanPham.getMaLoai(),  // Mã loại
+            loaiSanPham.getTenLoai()  // Tên loại
+        });
+    }
+}
+
+private void clearFields() {
+    txtTenLoai.setText("");  // Xóa tên loại
+}
+
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,16 +97,14 @@ public class Loai extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtTenLoai = new javax.swing.JTextField();
+        jButtonadd = new javax.swing.JButton();
+        jButtonupdate = new javax.swing.JButton();
+        jButtondelete = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableLoaiSanPham = new javax.swing.JTable();
 
         jButton3.setText("jButton3");
 
@@ -93,41 +150,40 @@ public class Loai extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Mã Loại:");
-
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tên Loại:");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setDisabledTextColor(new java.awt.Color(51, 102, 255));
+        txtTenLoai.setBackground(new java.awt.Color(255, 255, 255));
+        txtTenLoai.setForeground(new java.awt.Color(0, 0, 0));
+        txtTenLoai.setDisabledTextColor(new java.awt.Color(51, 102, 255));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField3.setCaretColor(new java.awt.Color(0, 51, 255));
-        jTextField3.setDisabledTextColor(new java.awt.Color(51, 51, 255));
-        jTextField3.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        jTextField3.setSelectionColor(new java.awt.Color(255, 51, 51));
-
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Thêm");
-
-        jButton2.setBackground(new java.awt.Color(102, 255, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cập Nhật");
-
-        jButton4.setBackground(new java.awt.Color(255, 51, 51));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Xóa");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonadd.setBackground(new java.awt.Color(51, 51, 255));
+        jButtonadd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonadd.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonadd.setText("Thêm");
+        jButtonadd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonaddActionPerformed(evt);
+            }
+        });
+
+        jButtonupdate.setBackground(new java.awt.Color(102, 255, 102));
+        jButtonupdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonupdate.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonupdate.setText("Cập Nhật");
+        jButtonupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonupdateActionPerformed(evt);
+            }
+        });
+
+        jButtondelete.setBackground(new java.awt.Color(255, 51, 51));
+        jButtondelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtondelete.setForeground(new java.awt.Color(255, 255, 255));
+        jButtondelete.setText("Xóa");
+        jButtondelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtondeleteActionPerformed(evt);
             }
         });
 
@@ -141,7 +197,7 @@ public class Loai extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLoaiSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -151,7 +207,7 @@ public class Loai extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane7.setViewportView(jTable2);
+        jScrollPane7.setViewportView(jTableLoaiSanPham);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,26 +219,19 @@ public class Loai extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
+                        .addComponent(jButtonadd, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonupdate)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtondelete, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtTenLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -190,19 +239,17 @@ public class Loai extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
+                    .addComponent(jButtonadd)
+                    .addComponent(jButtonupdate)
+                    .addComponent(jButtondelete)
                     .addComponent(jButton5))
                 .addGap(21, 21, 21))
         );
@@ -221,13 +268,115 @@ public class Loai extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jButtondeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtondeleteActionPerformed
+        try {
+        // Lấy mã loại sản phẩm từ dòng được chọn trong JTable
+        int selectedRow = jTableLoaiSanPham.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một loại sản phẩm để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lấy mã loại từ bảng (dòng được chọn)
+        int maLoai = (int) jTableLoaiSanPham.getValueAt(selectedRow, 0);  // Lấy mã loại từ dòng được chọn
+
+        // Xác nhận trước khi xóa
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa loại sản phẩm này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;  // Nếu người dùng chọn "No", không thực hiện xóa
+        }
+
+        // Gọi phương thức delete trong LoaiSanPhamBUS để xóa loại sản phẩm
+        LoaiSanPhamBUS loaiSanPhamBUS = new LoaiSanPhamBUS();
+        boolean success = loaiSanPhamBUS.delete(maLoai);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Xóa loại sản phẩm thành công!");
+            loadLoaiSanPhamToTable();  // Cập nhật lại bảng sau khi xóa
+            clearFields();
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi khi xóa loại sản phẩm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButtondeleteActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
              this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButtonaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddActionPerformed
+            try {
+        // Lấy dữ liệu từ các ô nhập liệu
+        String tenLoai = txtTenLoai.getText().trim();   // Lấy tên loại từ textbox
+
+        // Kiểm tra nếu tên loại trống
+        if (tenLoai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên loại sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Tạo đối tượng LoaiSanPhamDTO từ dữ liệu nhập
+        LoaiSanPhamDTO loaiSanPham = new LoaiSanPhamDTO(0, tenLoai);  // Mã loại sẽ tự động tăng dần
+
+        // Gọi phương thức add từ LoaiSanPhamBUS
+        LoaiSanPhamBUS loaiSanPhamBUS = new LoaiSanPhamBUS();
+        boolean success = loaiSanPhamBUS.add(loaiSanPham);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Thêm loại sản phẩm thành công!");
+            loadLoaiSanPhamToTable();  // Cập nhật lại bảng sau khi thêm
+            clearFields();  // Xóa các trường nhập liệu sau khi thêm thành công
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm loại sản phẩm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }                         
+    }//GEN-LAST:event_jButtonaddActionPerformed
+
+    private void jButtonupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonupdateActionPerformed
+        try {
+        // Lấy mã loại sản phẩm từ dòng được chọn trong JTable
+        int selectedRow = jTableLoaiSanPham.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một loại sản phẩm để cập nhật!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lấy mã loại từ bảng (dòng được chọn)
+        int maLoai = (int) jTableLoaiSanPham.getValueAt(selectedRow, 0);  // Lấy mã loại từ dòng được chọn
+
+        // Lấy tên loại từ textbox
+        String tenLoai = txtTenLoai.getText().trim();
+
+        // Kiểm tra nếu tên loại trống
+        if (tenLoai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên loại sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Tạo đối tượng LoaiSanPhamDTO từ dữ liệu nhập
+        LoaiSanPhamDTO loaiSanPham = new LoaiSanPhamDTO(maLoai, tenLoai);
+
+        // Gọi phương thức update trong LoaiSanPhamBUS để cập nhật thông tin loại sản phẩm
+        LoaiSanPhamBUS loaiSanPhamBUS = new LoaiSanPhamBUS();
+        boolean success = loaiSanPhamBUS.update(loaiSanPham);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thông tin loại sản phẩm thành công!");
+            loadLoaiSanPhamToTable();  // Cập nhật lại bảng sau khi cập nhật
+            clearFields();
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật loại sản phẩm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButtonupdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,6 +407,10 @@ public class Loai extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -268,21 +421,19 @@ public class Loai extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonadd;
+    private javax.swing.JButton jButtondelete;
+    private javax.swing.JButton jButtonupdate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable jTableLoaiSanPham;
+    private javax.swing.JTextField txtTenLoai;
     // End of variables declaration//GEN-END:variables
 }

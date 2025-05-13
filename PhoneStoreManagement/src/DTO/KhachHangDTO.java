@@ -57,8 +57,8 @@ public class KhachHangDTO {
         this.email = email;
     }
     @Override
-public String toString() {
-    return maKhachHang + " - " + hoTenKhachHang;
-}
+    public String toString() {
+        return maKhachHang + " - " + hoTenKhachHang;
+    }
 
 }

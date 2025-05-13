@@ -24,6 +24,22 @@ public class NhaCungCapBUS {
         }
         return null;
     }
+    public ArrayList<NhaCungCapDTO> timKiemNCC(String keyword) {
+        ArrayList<NhaCungCapDTO> ketQua = new ArrayList<>();
+        keyword = keyword.toLowerCase();
+
+        for (NhaCungCapDTO ncc : danhSachNCC) {
+            if (String.valueOf(ncc.getMaNCC()).contains(keyword)
+                || ncc.getTenNCC().toLowerCase().contains(keyword)
+                || ncc.getDiaChi().toLowerCase().contains(keyword)
+                || ncc.getSDT().toLowerCase().contains(keyword)
+                || ncc.getEmail().toLowerCase().contains(keyword)) {
+                ketQua.add(ncc);
+            }
+        }
+
+        return ketQua;
+    }
 
     public boolean themNhaCungCap(NhaCungCapDTO ncc) {
         if (getNhaCungCapById(ncc.getMaNCC()) != null) {

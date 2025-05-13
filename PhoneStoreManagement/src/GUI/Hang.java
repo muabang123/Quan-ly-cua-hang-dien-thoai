@@ -4,7 +4,14 @@
  */
 package GUI;
 
+import BUS.HangBUS;
+import DTO.HangDTO;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,7 +28,57 @@ public class Hang extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); // Hiển thị ở giữa màn hình
         this.setResizable(false); // Ngăn người dùng thay đổi kích thước cửa sổ
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loadHangToTable(); 
+        addRowSelectionListenerToTable();
     }
+    
+    
+   private void loadHangToTable() {
+    // Lấy model của JTable
+    DefaultTableModel model = (DefaultTableModel) jTableHang.getModel();
+    model.setRowCount(0);  // Xóa dữ liệu cũ trong bảng
+
+    // Lấy danh sách tất cả các hãng từ CSDL
+    HangBUS hangBUS = new HangBUS();
+    ArrayList<HangDTO> list = hangBUS.getAll();
+
+    // Duyệt qua danh sách và thêm vào bảng
+    for (HangDTO hang : list) {
+        model.addRow(new Object[]{
+            hang.getMaHang(),  // Cột Mã hãng
+            hang.getTenHang(), // Cột Tên hãng
+            hang.getQuocGia()  // Cột Quốc gia
+        });
+    }
+}
+   
+   private void clearFields() {
+    txtTenHang.setText("");    // Xóa tên hãng
+    txtQuocGia.setText("");    // Xóa quốc gia
+}
+   
+  // Gọi khi form được mở hoặc khi bảng được tạo
+private void addRowSelectionListenerToTable() {
+    // Thêm ListSelectionListener cho JTable
+    jTableHang.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+        // Kiểm tra xem dòng nào được chọn
+        if (!e.getValueIsAdjusting()) {
+            int selectedRow = jTableHang.getSelectedRow();  // Lấy chỉ số dòng được chọn
+            
+            if (selectedRow != -1) {  // Nếu có dòng được chọn
+                // Lấy dữ liệu từ dòng được chọn
+              
+                String tenHang = (String) jTableHang.getValueAt(selectedRow, 1);  // Lấy Tên hãng
+                String quocGia = (String) jTableHang.getValueAt(selectedRow, 2);  // Lấy Quốc gia
+                
+                // Đổ dữ liệu vào các trường nhập liệu
+              
+                txtTenHang.setText(tenHang);
+                txtQuocGia.setText(quocGia);
+            }
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,18 +95,16 @@ public class Hang extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        txtTenHang = new javax.swing.JTextField();
+        txtQuocGia = new javax.swing.JTextField();
+        jButtonAdd = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonOut = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableHang = new javax.swing.JTable();
 
         jButton3.setText("jButton3");
 
@@ -95,67 +150,71 @@ public class Hang extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Mã hãng:");
-
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tên Hãng:");
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Quốc gia:");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setDisabledTextColor(new java.awt.Color(51, 102, 255));
+        txtTenHang.setBackground(new java.awt.Color(255, 255, 255));
+        txtTenHang.setForeground(new java.awt.Color(0, 0, 0));
+        txtTenHang.setDisabledTextColor(new java.awt.Color(51, 102, 255));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.setCaretColor(new java.awt.Color(51, 51, 255));
+        txtQuocGia.setBackground(new java.awt.Color(255, 255, 255));
+        txtQuocGia.setForeground(new java.awt.Color(0, 0, 0));
+        txtQuocGia.setCaretColor(new java.awt.Color(51, 51, 255));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField3.setCaretColor(new java.awt.Color(0, 51, 255));
-        jTextField3.setDisabledTextColor(new java.awt.Color(51, 51, 255));
-        jTextField3.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        jTextField3.setSelectionColor(new java.awt.Color(255, 51, 51));
-
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Thêm");
-
-        jButton2.setBackground(new java.awt.Color(102, 255, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cập Nhật");
-
-        jButton4.setBackground(new java.awt.Color(255, 51, 51));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Xóa");
-
-        jButton5.setBackground(new java.awt.Color(0, 0, 0));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Thoát");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdd.setBackground(new java.awt.Color(51, 51, 255));
+        jButtonAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAdd.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAdd.setText("Thêm");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonAddActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jButtonUpdate.setBackground(new java.awt.Color(102, 255, 102));
+        jButtonUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonUpdate.setText("Cập Nhật");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
+
+        jButtonDelete.setBackground(new java.awt.Color(255, 51, 51));
+        jButtonDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonDelete.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonDelete.setText("Xóa");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
+
+        jButtonOut.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonOut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonOut.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonOut.setText("Thoát");
+        jButtonOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOutActionPerformed(evt);
+            }
+        });
+
+        jTableHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Mã hãng", "Tên Hãng", "Quốc gia"
             }
         ));
-        jScrollPane7.setViewportView(jTable2);
+        jScrollPane7.setViewportView(jTableHang);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,27 +227,24 @@ public class Hang extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
+                                .addGap(162, 162, 162)
                                 .addComponent(jLabel3))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
+                                .addComponent(jButtonUpdate)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5))))
+                                .addComponent(jButtonOut))))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -196,22 +252,20 @@ public class Hang extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonUpdate)
+                    .addComponent(jButtonDelete)
+                    .addComponent(jButtonOut)
+                    .addComponent(jButtonAdd))
                 .addGap(21, 21, 21))
         );
 
@@ -229,9 +283,102 @@ public class Hang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutActionPerformed
              this.dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonOutActionPerformed
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+      try {
+        // Lấy dữ liệu từ các trường nhập liệu
+        String tenHang = txtTenHang.getText().trim();
+        String quocGia = txtQuocGia.getText().trim();
+
+        // Kiểm tra nếu các trường dữ liệu trống
+        if (tenHang.isEmpty() || quocGia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;  // Dừng lại nếu có trường trống
+        }
+
+        // Lấy mã hãng tự động từ CSDL
+        HangBUS hangBUS = new HangBUS();
+        int maHang = hangBUS.getNextMaHang();  // Lấy mã hãng tiếp theo từ CSDL
+
+        // Tạo đối tượng HangDTO từ các trường nhập liệu
+        HangDTO hang = new HangDTO(maHang, tenHang, quocGia);
+
+        // Gọi phương thức add trong HangBUS để thêm hãng vào CSDL
+        boolean success = hangBUS.add(hang);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Thêm hãng thành công!");
+            loadHangToTable();  // Cập nhật lại bảng sau khi thêm
+            clearFields();
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm hãng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+   try {
+        // Lấy mã hãng từ bảng khi người dùng chọn dòng
+        int selectedRow = jTableHang.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hãng để cập nhật!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int maHang = (int) jTableHang.getValueAt(selectedRow, 0);  // Lấy mã hãng từ dòng được chọn
+        
+        String tenHang = txtTenHang.getText().trim();   // Lấy tên hãng từ textbox
+        String quocGia = txtQuocGia.getText().trim();    // Lấy quốc gia từ textbox
+
+        // Kiểm tra nếu các trường dữ liệu trống
+        if (tenHang.isEmpty() || quocGia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;  // Dừng lại nếu có trường trống
+        }
+
+        // Tạo đối tượng HangDTO từ các trường nhập liệu
+        HangDTO hang = new HangDTO(maHang, tenHang, quocGia);
+        HangBUS hangBUS = new HangBUS();
+
+        // Gọi phương thức update trong HangBUS để cập nhật thông tin hãng
+        boolean success = hangBUS.update(hang);
+
+        if (success) {
+           clearFields();
+            loadHangToTable();  // Cập nhật lại bảng sau khi cập nhật
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật hãng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        int selectedRow = jTableHang.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một hãng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int maHang = (int) jTableHang.getValueAt(selectedRow, 0);  // Lấy mã hãng từ dòng được chọn
+
+    HangBUS hangBUS = new HangBUS();
+    boolean success = hangBUS.delete(maHang);
+
+    if (success) {
+        JOptionPane.showMessageDialog(this, "Xóa hãng thành công!");
+        loadHangToTable();  // Cập nhật lại bảng sau khi xóa
+    } else {
+        JOptionPane.showMessageDialog(this, "Lỗi khi xóa hãng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,6 +407,8 @@ public class Hang extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -270,13 +419,12 @@ public class Hang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonOut;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -284,9 +432,8 @@ public class Hang extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable jTableHang;
+    private javax.swing.JTextField txtQuocGia;
+    private javax.swing.JTextField txtTenHang;
     // End of variables declaration//GEN-END:variables
 }

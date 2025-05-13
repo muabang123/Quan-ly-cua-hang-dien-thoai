@@ -48,6 +48,18 @@ public class KhachHangBUS {
         }
         return false;
     }
+    public ArrayList<KhachHangDTO> timKiemKhachHang(String tuKhoa) {
+        ArrayList<KhachHangDTO> ketQua = new ArrayList<>();
+        for (KhachHangDTO kh : danhSachKhachHang) {
+            if (kh.getHoTenKhachHang().toLowerCase().contains(tuKhoa.toLowerCase()) ||
+                kh.getDiaChi().toLowerCase().contains(tuKhoa.toLowerCase()) ||
+                kh.getSoDienThoai().toLowerCase().contains(tuKhoa.toLowerCase()) ||
+                kh.getEmail().toLowerCase().contains(tuKhoa.toLowerCase())) {
+                ketQua.add(kh);
+            }
+        }
+        return ketQua;
+    }
 
     public boolean xoaKhachHang(int maKH) {
         if (KhachHangDAO.getInstance().delete(String.valueOf(maKH)) > 0) {

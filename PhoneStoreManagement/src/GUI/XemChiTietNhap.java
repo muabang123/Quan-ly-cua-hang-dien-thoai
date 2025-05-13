@@ -255,7 +255,7 @@ public class XemChiTietNhap extends javax.swing.JFrame {
         document.add(new Paragraph("Người thực hiện: " + jTextField2.getText(), timesNewRomanFont));
         document.add(new Paragraph("Thời gian nhập: " + jTextField4.getText(), timesNewRomanFont));
         document.add(new Paragraph("\n"));
-        PdfPTable table = new PdfPTable(8);
+        PdfPTable table = new PdfPTable(9);
         table.setWidthPercentage(100);
         table.addCell(new Phrase("STT", timesNewRomanFont));
         table.addCell(new Phrase("Mã SP", timesNewRomanFont));
@@ -265,6 +265,7 @@ public class XemChiTietNhap extends javax.swing.JFrame {
         table.addCell(new Phrase("ROM", timesNewRomanFont));
         table.addCell(new Phrase("Màu sắc", timesNewRomanFont));
         table.addCell(new Phrase("Đơn giá", timesNewRomanFont));
+        table.addCell(new Phrase("Thành tiền", timesNewRomanFont));
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
             table.addCell(new Phrase(String.valueOf(i + 1), timesNewRomanFont)); // STT
@@ -274,7 +275,20 @@ public class XemChiTietNhap extends javax.swing.JFrame {
             table.addCell(new Phrase(model.getValueAt(i, 4).toString(), timesNewRomanFont)); // RAM
             table.addCell(new Phrase(model.getValueAt(i, 5).toString(), timesNewRomanFont)); // ROM
             table.addCell(new Phrase(model.getValueAt(i, 6).toString(), timesNewRomanFont)); // Màu sắc
-            table.addCell(new Phrase(model.getValueAt(i, 7).toString(), timesNewRomanFont)); // Đơn giá
+            DecimalFormat formatter = new DecimalFormat("#,###");
+
+            try {
+                int soLuong = Integer.parseInt(model.getValueAt(i, 3).toString());
+                String donGiaStr = model.getValueAt(i, 7).toString().replace(",", "").replace(".", "").replace(" ", "");
+                double donGia = Double.parseDouble(donGiaStr);
+                double thanhTien = soLuong * donGia;
+
+                table.addCell(new Phrase(formatter.format(donGia), timesNewRomanFont));
+                table.addCell(new Phrase(formatter.format(thanhTien), timesNewRomanFont));
+            } catch (NumberFormatException e) {
+                table.addCell(new Phrase("Lỗi giá", timesNewRomanFont));
+                table.addCell(new Phrase("Lỗi tiền", timesNewRomanFont));
+            }
         }
 
         document.add(table);

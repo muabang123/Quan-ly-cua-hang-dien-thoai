@@ -8,6 +8,7 @@ import BUS.*;
 import BUS.KhachHangBUS;
 import BUS.SanPhamBUS;
 import DTO.*;
+import config.CheckUtil;
 import java.awt.Image;
 import java.io.File;
 import java.math.BigDecimal;
@@ -245,6 +246,15 @@ public class SuaNhaCungCap extends javax.swing.JFrame {
         String sdt = txtSDT.getText().trim();
         String email = txtEmail.getText().trim();
 
+        if (!CheckUtil.isValidPhoneNumber(txtSDT.getText().trim())) {
+    JOptionPane.showMessageDialog(this, "Số điện thoại phải có đúng 10 chữ số!");
+    return;
+}
+
+if (!CheckUtil.isValidEmail(txtEmail.getText().trim())) {
+    JOptionPane.showMessageDialog(this, "Email không đúng định dạng!");
+    return;
+}
         // Tạo đối tượng khách hàng DTO
         NhaCungCapDTO kh = new NhaCungCapDTO(maKH, tenKH, diaChi, sdt, email);
         NhaCungCapBUS khBUS = new NhaCungCapBUS();
@@ -254,7 +264,7 @@ public class SuaNhaCungCap extends javax.swing.JFrame {
 
         if (updatedKH) {
             JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-            mainForm.loadKhachHangToTable(); // Load lại bảng nếu có
+            mainForm.loadNhaCungCapToTable(); // Load lại bảng nếu có
             this.dispose(); // Đóng form sau khi cập nhật
         } else {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);

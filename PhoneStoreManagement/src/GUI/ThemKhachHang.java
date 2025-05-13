@@ -10,6 +10,7 @@ import BUS.SanPhamBUS;
 import DTO.ChiTietSanPhamDTO;
 import DTO.KhachHangDTO;
 import DTO.SanPhamDTO;
+import config.CheckUtil;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.File;
@@ -221,7 +222,6 @@ public class ThemKhachHang extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
  try {
-    // Kiểm tra dữ liệu nhập vào
     if (txtMa.getText().isEmpty() ||
         txtTen.getText().isEmpty() ||
         txtDiaChi.getText().isEmpty() ||
@@ -232,21 +232,28 @@ public class ThemKhachHang extends javax.swing.JFrame {
         return;
     }
 
-    // Lấy dữ liệu từ các ô nhập
+   if (!CheckUtil.isValidPhoneNumber(txtSDT.getText().trim())) {
+    JOptionPane.showMessageDialog(this, "Số điện thoại phải có đúng 10 chữ số!");
+    return;
+}
+
+if (!CheckUtil.isValidEmail(txtEmail.getText().trim())) {
+    JOptionPane.showMessageDialog(this, "Email không đúng định dạng!");
+    return;
+}
+
+
     int maKH = Integer.parseInt(txtMa.getText().trim());
     String hoTen = txtTen.getText().trim();
     String diaChi = txtDiaChi.getText().trim();
     String sdt = txtSDT.getText().trim();
     String email = txtEmail.getText().trim();
 
-    // Tạo DTO khách hàng
      KhachHangDTO kh = new KhachHangDTO(maKH, hoTen, diaChi, sdt, email);
 
-    // Thêm khách hàng vào BUS
     KhachHangBUS khBUS = new KhachHangBUS();
     boolean result = khBUS.themKhachHang(kh);
 
-    // Kết quả
     if (result) {
         JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công!");
         clearFields(); // Xóa form sau khi thêm

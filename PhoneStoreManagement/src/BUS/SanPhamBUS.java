@@ -11,8 +11,21 @@ public class SanPhamBUS {
 
     // Constructor: Khởi tạo dữ liệu khi tạo đối tượng
     public SanPhamBUS() {
-        loadData();  // Cập nhật lại danh sách sản phẩm từ DAO khi khởi tạo
+       loadData();
     }
+    
+    public ArrayList<SanPhamDTO> search(String text) {
+    text = text.toLowerCase();
+    ArrayList<SanPhamDTO> result = new ArrayList<>();
+    for (SanPhamDTO sp : this.getAll()) {
+        if (Integer.toString(sp.getMaSanPham()).toLowerCase().contains(text)
+            || sp.getTenSanPham().toLowerCase().contains(text)) {
+            result.add(sp);
+        }
+    }
+    return result;
+}
+
 
     // Phương thức tải dữ liệu từ DAO
     public void loadData() {
@@ -80,28 +93,16 @@ public class SanPhamBUS {
         return check;
     }
 
-    // Lấy danh sách sản phẩm theo mã loại
-    public ArrayList<SanPhamDTO> getByMaLoai(int maLoai) {
-        ArrayList<SanPhamDTO> result = new ArrayList<>();
-        for (SanPhamDTO sp : this.listSP) {
-            if (sp.getMaLoai() == maLoai) {
-                result.add(sp);
-            }
-        }
-        return result;
+  // Kiểm tra mã sản phẩm có tồn tại trong cơ sở dữ liệu hay không
+    public boolean isMaSanPhamExist(int maSanPham) {
+        return spDAO.isMaSanPhamExist(maSanPham);
     }
 
-    // Tìm kiếm sản phẩm theo tên hoặc mã sản phẩm
-    public ArrayList<SanPhamDTO> search(String text) {
-        text = text.toLowerCase();  // Chuyển về chữ thường để so sánh không phân biệt hoa thường
-        ArrayList<SanPhamDTO> result = new ArrayList<>();
-        for (SanPhamDTO sp : this.listSP) {
-            if (Integer.toString(sp.getMaSanPham()).toLowerCase().contains(text) || sp.getTenSanPham().toLowerCase().contains(text)) {
-                result.add(sp);
-            }
-        }
-        return result;
-    }
+
+    
+
+
+    
 
     // Tính tổng số lượng sản phẩm
     public int getTotalQuantity() {
